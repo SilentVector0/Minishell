@@ -6,7 +6,7 @@
 /*   By: mathieu <mathieu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 09:54:06 by msuter            #+#    #+#             */
-/*   Updated: 2026/03/31 13:27:41 by mathieu          ###   ########.fr       */
+/*   Updated: 2026/03/31 13:34:21 by mathieu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	testing(t_parser *parser)
 				i++;
 			}
 		}
-		parser = parser->next;dewwedgewiugdweiuy
+		parser = parser->next;
 	}
 }
 
