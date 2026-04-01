@@ -45,7 +45,7 @@ t_redir	*which_type(t_token *token, int *nb)
 	else
 		temp->type = REDIR_HEREDOC;
 	(*nb)++;
-	temp->file = ft_strdup(token[*nb].content);
+	temp->file = filter_dup(token[*nb].content);
 	(*nb)++;
 	return (temp);
 }
@@ -66,11 +66,11 @@ void	arg_after_cmd(t_token *token, t_parser *current, int *nb)
 	if (!current->arg)
 		return ;
 	count = 0;
-	current->arg[count] = ft_strdup(current->cmd);
+	current->arg[count] = filter_dup(current->cmd);
 	count++;
 	while(*nb != temp)
 	{
-		current->arg[count] = ft_strdup(token[*nb].content);
+		current->arg[count] = filter_dup(token[*nb].content);
 		count++;
 		(*nb)++;
 	}
@@ -83,7 +83,7 @@ void	cmd_or_file(t_token *token, t_parser *current, int *nb)
 
 	if (*nb == 0)
 	{
-		current->cmd = ft_strdup(token[*nb].content);
+		current->cmd = filter_dup(token[*nb].content);
 		(*nb)++;
 		arg_after_cmd(token, current, nb);
 	}
@@ -92,7 +92,7 @@ void	cmd_or_file(t_token *token, t_parser *current, int *nb)
 		test = *nb - 1;
 		if (is_redirect(token, &test) == 0)
 		{
-			current->cmd = ft_strdup(token[*nb].content);
+			current->cmd = filter_dup(token[*nb].content);
 			(*nb)++;
 			arg_after_cmd(token, current, nb);
 		}
