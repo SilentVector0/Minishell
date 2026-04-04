@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-int filter_dup(char *content)
+static int	count_new(char *content)
 {
 	int		i;
 	int		count;
@@ -13,33 +13,46 @@ int filter_dup(char *content)
 		if (content[i] == '\'' || content[i] == '\"')
 		{
 			quote = content[i++];
-			while (quote != content[i] && content[i])
+			while (content[i] && quote != content[i])
 			{
 				count++;
 				i++;
 			}
-			if (content[i] == quote)
 			i++;
-			}
+		}
 		else
 		{
 			count++;
 			i++;
 		}
 	}
-	printf("%d\n", count);
-	// res = malloc(sizeof(char) * count + 1);
-	// i = 0;
-	// count = 0;
-	// while (content[i])
-	// {
-	// 	if (content[i] != '\'' && content[i] != '\"')
-	// 	{
-	// 		res[count] = content[i];
-	// 		count++;
-	// 	}
-	// 	i++;
-	// }
-	// res[count] = '\0';
-	// return (res);
+	return (count);
+}
+
+char	*filter_dup(char *content)
+{
+	char	*res;
+	int		i;
+	int		count;
+	char	quote;
+
+	i = 0;
+	count = 0;
+	res = malloc(sizeof(char) * count_new(content) + 1);
+	while (content[i])
+	{
+		if (content[i] == '\'' || content[i] == '\"')
+		{
+			quote = content[i++];
+			while (content[i] && content[i] != quote)
+				res[count++] = content[i++];
+			i++;
+		}
+		else
+		{
+			res[count++] = content[i++];
+		}
+	}
+	res[count] = '\0';
+	return (res);
 }
