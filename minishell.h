@@ -90,5 +90,8 @@ void		free_parser(t_parser *parser);
 
 //! fonctions expander
 void	search_var(t_parser *parser, char **envp);
+char	*filter_dup(char *content);
+
+extern int	last_cmd_result;
 
 #endif
