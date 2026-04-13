@@ -100,9 +100,10 @@ static void	special_var(t_parser *parser, int j, t_shell *shell)
 		{
 			if (parser->arg[j][i + 1] == '?')
 			{
-				i += 2;
+				if (parser->arg[j][i + 2] != '\0')
+					i += 2;
 				new_size = 0;
-				while (tmp[new_size])
+				while (tmp[new_size] && new[k])
 				{
 					new[k] = tmp[new_size];
 					k++;
@@ -117,6 +118,8 @@ static void	special_var(t_parser *parser, int j, t_shell *shell)
 		}
 		i++;
 	}
+	printf("%d\n", k);
+	new[k - 1] = '\0';
 	free (parser->arg[j]);
 	free(tmp);
 	parser->arg[j] = new;
