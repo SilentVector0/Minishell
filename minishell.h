@@ -52,6 +52,7 @@ typedef struct t_redir t_redir;
 typedef struct t_redir
 {
 	int		type;
+	int		heredoc_fd;
 	char	*file;
 	t_redir	*r_next;
 }	t_redir;
@@ -65,6 +66,13 @@ typedef struct t_parser
 	t_parser	*next;
 }	t_parser;
 
+typedef struct s_shell
+{
+	char	**envp;
+	int		exit_status;
+	int		line_num;
+}	t_shell;
+
 //! fonctions generales
 void	case_error(char *imput, t_token *token,
 			char *message_erroor, int nb_token);
@@ -72,7 +80,7 @@ void	case_continue(char *imput, t_token *token, char *message_erroor);
 void	end_prog(char *imput, t_token *token, int nb_token);
 void	free_token(char *imput, t_token *token, int nb_token);
 
-//! fonctions concernant mon lexer
+//! fonctions lexer
 int		is_space(char c);
 int		how_many_tokens(char *imput);
 int		case_word(char *imput, t_contexte *c);
@@ -80,12 +88,23 @@ t_token	*lexing(char *imput, int verif_nb);
 void	case_in_or_heredoc(char *imput, t_contexte *c, t_token *token);
 void	case_out_or_happend(char *imput, t_contexte *c, t_token *token);
 
-//! fonctions concernant mon parser
+//! fonctions parser
 int			is_redirect(t_token *token, int	*nb);
 t_parser	*new_node(void);
 t_redir		*new_redir_node(void);
 t_redir		*attach_redir_node(t_redir *current);
 t_parser	*create_parser(t_token *token);
 void		free_parser(t_parser *parser);
+
+//! fonctions expander
+void	search_var(t_parser *parser, t_shell *shell);
+char	*filter_dup(char *content);
+
+//! fonction exec
+void	exec_redir(t_redir *redir);
+int		execute_cmd(t_parser *parser, t_shell *shell);
+int		perror_return(char *msg, int ret);
+int		prepare_heredocs(t_parser *parser, t_shell *shell);
+
 
 #endif

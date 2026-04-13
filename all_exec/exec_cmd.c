@@ -15,8 +15,8 @@ int	child_process(t_parser *current, int fd[2], int *prev_fd, t_shell *shell)
 	}
 	if (current->redir)
 		exec_redir(current->redir);
-	if (is_builtin(current))
-		exit (exec_builtin(current, shell));
+	// if (is_builtin(current))
+	// 	exit (exec_builtin(current, shell));
 	execve(current->arg[0], current->arg, shell->envp);
 	perror(current->arg[0]);
 	exit(127);
@@ -70,13 +70,13 @@ int	execute_cmd(t_parser *parser, t_shell *shell)
 		shell->exit_status = 1;
 		return (1);
 	}
-	if (is_builtin(parser) && parser->next == NULL)
-	{
-		if (parser->redir)
-			exec_redir(parser->redir);
-		shell->exit_status = exec_builtin(parser. shell);
-		return (shell->exit_status);
-	}
+	// if (is_builtin(parser) && parser->next == NULL)
+	// {
+	// 	if (parser->redir)
+	// 		exec_redir(parser->redir);
+	// 	shell->exit_status = exec_builtin(parser. shell);
+	// 	return (shell->exit_status);
+	// }
 	shell->exit_status = execute_pipeline(parser, &prev_fd, shell);
 	if (prev_fd != -1)
 		close (prev_fd);

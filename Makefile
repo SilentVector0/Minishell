@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mathieu <mathieu@student.42.fr>            +#+  +:+       +#+         #
+#    By: msuter <msuter@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/15 11:05:43 by msuter            #+#    #+#              #
-#    Updated: 2026/03/31 15:10:41 by mathieu          ###   ########.fr        #
+#    Updated: 2026/04/13 14:06:40 by msuter           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,12 @@ PARSER_SRCS = all_parser/chained_list/redir_chained.c \
 				all_parser/chained_list/t_parser_chained.c \
 				all_parser/parser.c all_parser/utils_parser.c
 
-EXEC_SRCS = all_exec/exec.c all_exec/utils_exec.c
+EXPANDER_SRCS = all_expander/expander.c all_expander/filter_dup.c
 
-SRCS = main.c $(LEXER_SRCS) $(PARSER_SRCS) $(EXEC_SRCS)
+EXEC_SRCS = all_exec/exec_cmd.c all_exec/exec_heredoc.c all_exec/exec_redir.c \
+				all_exec/exec_utils.c
+
+SRCS = main.c $(LEXER_SRCS) $(PARSER_SRCS) $(EXEC_SRCS) $(EXPANDER_SRCS)
 
 OBJS = $(SRCS:.c=.o)
 

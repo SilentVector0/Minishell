@@ -1,3 +1,5 @@
+#include "../minishell.h"
+
 int	is_builtin(t_parser *parser)
 {
 	if (!parser->cmd)
