@@ -39,3 +39,9 @@ void	free_parser(t_parser *parser)
 		free (tmp);
 	}
 }
+
+int	perror_return(char *msg, int ret)
+{
+	perror(msg);
+	return (ret);
+}
