@@ -81,7 +81,7 @@ static int	count_len(char *str)
 	return (i);
 }
 
-void	special_var(t_parser *parser, int j)
+static void	special_var(t_parser *parser, int j, t_shell *shell)
 {
 	char	*tmp;
 	char	*new;
@@ -122,7 +122,7 @@ void	special_var(t_parser *parser, int j)
 	parser->arg[j] = new;
 }
 
-void	search_var(t_parser *parser, char **envp)
+void	search_var(t_parser *parser, t_shell *shell)
 {
 	int		i;
 	int		j;
@@ -146,14 +146,14 @@ void	search_var(t_parser *parser, char **envp)
 				i++;
 				if (parser->arg[j][i] == '?')
 				{
-					special_var(parser, j);
+					special_var(parser, j, shell);
 					break;
 				}
 				len = count_len(parser->arg[j] + i);
 				tmp = ft_substr(parser->arg[j], i, len);
 				var = ft_strjoin(tmp, "=");
 				free (tmp);
-				tmp = schr_in_env(var, envp);
+				tmp = schr_in_env(var, shell->envp);
 				break;
 			}
 			i++;

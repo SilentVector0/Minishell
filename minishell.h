@@ -52,6 +52,7 @@ typedef struct t_redir t_redir;
 typedef struct t_redir
 {
 	int		type;
+	int		heredoc_fd;
 	char	*file;
 	t_redir	*r_next;
 }	t_redir;
@@ -64,6 +65,13 @@ typedef struct t_parser
 	t_redir		*redir;
 	t_parser	*next;
 }	t_parser;
+
+typedef struct s_shell
+{
+	char	**envp;
+	int		exit_status;
+	int		line_num;
+}	t_shell;
 
 //! fonctions generales
 void	case_error(char *imput, t_token *token,
@@ -89,7 +97,14 @@ t_parser	*create_parser(t_token *token);
 void		free_parser(t_parser *parser);
 
 //! fonctions expander
-void	search_var(t_parser *parser, char **envp);
+void	search_var(t_parser *parser, t_shell *shell);
 char	*filter_dup(char *content);
+
+//! fonction exec
+void	exec_redir(t_redir *redir);
+int		execute_cmd(t_parser *parser, t_shell *shell);
+int		perror_return(char *msg, int ret);
+int		prepare_heredocs(t_parser *parser, t_shell *shell);
+
 
 #endif

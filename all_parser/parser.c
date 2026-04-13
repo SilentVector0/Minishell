@@ -16,6 +16,7 @@ t_redir	*which_type(t_token *token, int *nb)
 		temp->type = REDIR_HEREDOC;
 	(*nb)++;
 	temp->file = ft_strdup(token[*nb].content);
+	temp->heredoc_fd = -1;
 	(*nb)++;
 	return (temp);
 }

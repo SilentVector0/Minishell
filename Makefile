@@ -6,7 +6,7 @@
 #    By: msuter <msuter@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/15 11:05:43 by msuter            #+#    #+#              #
-#    Updated: 2026/04/07 21:27:14 by msuter           ###   ########.fr        #
+#    Updated: 2026/04/13 14:06:40 by msuter           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ PARSER_SRCS = all_parser/chained_list/redir_chained.c \
 
 EXPANDER_SRCS = all_expander/expander.c all_expander/filter_dup.c
 
-//EXEC_SRCS = all_exec/exec.c all_exec/utils_exec.c
+EXEC_SRCS = all_exec/exec_cmd.c all_exec/exec_heredoc.c all_exec/exec_redir.c \
+				all_exec/exec_utils.c
 
 SRCS = main.c $(LEXER_SRCS) $(PARSER_SRCS) $(EXEC_SRCS) $(EXPANDER_SRCS)
 
