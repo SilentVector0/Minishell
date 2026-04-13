@@ -93,7 +93,8 @@ int			is_redirect(t_token *token, int	*nb);
 t_parser	*new_node(void);
 t_redir		*new_redir_node(void);
 t_redir		*attach_redir_node(t_redir *current);
-t_parser	*create_parser(t_token *token);
+t_parser	*create_parser(t_token *token, t_shell *shell);
+char		*get_path(char *cmd, char **envp);
 void		free_parser(t_parser *parser);
 
 //! fonctions expander

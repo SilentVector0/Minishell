@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 13:23:20 by aroduit           #+#    #+#             */
-/*   Updated: 2026/04/13 14:17:19 by msuter           ###   ########.fr       */
+/*   Created: 2026/04/13 14:44:47 by aroduit           #+#    #+#             */
+/*   Updated: 2026/04/13 14:44:47 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int argc, char **argv, char **envp)
 			case_continue(imput, token, "erreur, il manque une quote");
 			continue ;
 		}
-		parser = create_parser(token);
+		parser = create_parser(token, shell);
 		search_var(parser, shell);
 		execute_cmd(parser, shell);
 		//testing(parser);

@@ -1,34 +1,5 @@
 #include "../minishell.h"
 
-char	*get_path(char *cmd, char **envp)
-{
-	char	**paths;
-	char	*path;
-	char	*env;
-	int		i;
-
-	if (ft_strchr(cmd, '/'))
-	{
-		if (!access(cmd, X_OK))
-			return (ft_strdup(cmd));
-		return (NULL);
-	}
-	env = get_env_path(envp);
-	if (!env)
-		return (NULL);
-	paths = ft_split(env, ':');
-	i = -1;
-	while (paths[++i])
-	{
-		path = build_path(paths[i], cmd);
-		if (path && !access(path, X_OK))
-			return (free_tab(paths), path);
-		free(path);
-	}
-	free_tab(paths);
-	return (NULL);
-}
-
 char	*get_env_path(char **envp)
 {
 	int	i;
@@ -66,4 +37,33 @@ void	free_tab(char **tab)
 	while (tab[++i])
 		free(tab[i]);
 	free(tab);
+}
+
+char	*get_path(char *cmd, char **envp)
+{
+	char	**paths;
+	char	*path;
+	char	*env;
+	int		i;
+
+	if (ft_strchr(cmd, '/'))
+	{
+		if (!access(cmd, X_OK))
+			return (ft_strdup(cmd));
+		return (NULL);
+	}
+	env = get_env_path(envp);
+	if (!env)
+		return (NULL);
+	paths = ft_split(env, ':');
+	i = -1;
+	while (paths[++i])
+	{
+		path = build_path(paths[i], cmd);
+		if (path && !access(path, X_OK))
+			return (free_tab(paths), path);
+		free(path);
+	}
+	free_tab(paths);
+	return (NULL);
 }

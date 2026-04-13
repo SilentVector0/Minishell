@@ -1,17 +1,5 @@
 #include "../minishell.h"
 
-<<<<<<< HEAD
-int prepare_one_heredoc(t_redir *redir, t_shell *shell)
-{
-	int		fd[2];
-
-	if (pipe(fd) == -1)
-		return (perror_return("pipe", 2));
-	heredoc_loop(fd[1], redir, shell);
-	close(fd[1]);
-	redir->heredoc_fd = fd[0];
-	return (0);
-=======
 void	warning_msg_heredoc(t_redir	*redir, int line_num)
 {
 	char	*num;
@@ -30,7 +18,6 @@ void	warning_msg_heredoc(t_redir	*redir, int line_num)
 	ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
 	ft_putstr_fd(redir->file, 2);
 	ft_putstr_fd("')\n", 2);
->>>>>>> main
 }
 
 void	heredoc_loop(int fd, t_redir *redir, t_shell *shell)
