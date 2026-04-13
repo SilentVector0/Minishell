@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 13:23:20 by aroduit           #+#    #+#             */
-/*   Updated: 2026/04/07 21:29:02 by msuter           ###   ########.fr       */
+/*   Updated: 2026/04/13 13:33:48 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	testing(t_parser *parser)
 		parser = parser->next;
 	}
 }
-
-int	last_cmd_result = 0;
 
 int	main(int argc, char **argv, char **envp)
 {

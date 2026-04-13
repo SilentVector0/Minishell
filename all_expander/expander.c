@@ -91,7 +91,7 @@ void	special_var(t_parser *parser, int j)
 
 	i = 0;
 	k = 0;
-	tmp = ft_itoa(last_cmd_result);
+	tmp = ft_itoa(shell->exit_status);
 	new_size = ft_strlen(tmp) + ft_strlen(parser->arg[j]) - 2;
 	new = malloc(sizeof(char) * new_size + 1);
 	while (parser->arg[j][i])
