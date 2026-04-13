@@ -35,11 +35,7 @@ void	heredoc_loop(int fd, t_redir *redir, t_shell *shell)
 			warning_msg_heredoc(redir, line_num);
 			break;
 		}
-<<<<<<< HEAD
-		if (ft_strcmp(line, redir->file) == 0)
-=======
 		if (ft_strncmp(line, redir->file, ft_strlen(redir->file)) == 0)
->>>>>>> main
 			break;
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
@@ -49,8 +45,6 @@ void	heredoc_loop(int fd, t_redir *redir, t_shell *shell)
 		free(line);
 }
 
-<<<<<<< HEAD
-=======
 int prepare_one_heredoc(t_redir *redir, t_shell *shell)
 {
 	int		fd[2];
@@ -63,7 +57,6 @@ int prepare_one_heredoc(t_redir *redir, t_shell *shell)
 	return (0);
 }
 
->>>>>>> main
 int	prepare_heredocs(t_parser *parser, t_shell *shell)
 {
 	t_parser	*current;
@@ -86,26 +79,3 @@ int	prepare_heredocs(t_parser *parser, t_shell *shell)
 	}
 	return (0);
 }
-<<<<<<< HEAD
-
-void	warning_msg_heredoc(t_redir	*redir, int line_num)
-{
-	char	*num;
-
-	num = ft_itoa(line_num);
-	if (!num)
-	{
-		ft_putstr_fd("warning: here-document delimited by end-of-file (wanted `", 2);
-		ft_putstr_fd(redir->file, 2);
-		ft_putstr_fd("')\n", 2);
-		return ;
-	}
-	ft_putstr_fd("warning: here-document at line ", 2);
-	ft_putstr_fd(num, 2);
-	free (num);
-	ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
-	ft_putstr_fd(redir->file, 2);
-	ft_putstr_fd("')\n", 2);
-}
-=======
->>>>>>> main
