@@ -48,6 +48,12 @@ static char	*schr_in_env(char *var, char **envp)
 
 	len = ft_strlen(var);
 	i = 0;
+	if (envp == NULL)
+	{
+		res = malloc (sizeof(char) * 1);
+		res[0] = '\0';
+		return (res);
+	}
 	if (len == 1)
 	{
 		res = malloc (sizeof(char) * 2);
@@ -118,7 +124,6 @@ static void	special_var(t_parser *parser, int j, t_shell *shell)
 		}
 		i++;
 	}
-	printf("%d\n", k);
 	new[k - 1] = '\0';
 	free (parser->arg[j]);
 	free(tmp);

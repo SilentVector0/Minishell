@@ -59,6 +59,7 @@ int	cmd_or_file(t_token *token, t_parser *current, int *nb, t_shell *shell)
 		{
 			ft_putstr_fd(token[0].content, 2);
 			ft_putstr_fd(": command not found\n", 2);
+			shell->exit_status = 127;
 			(*nb)++;
 			return (1);
 		}
@@ -75,6 +76,7 @@ int	cmd_or_file(t_token *token, t_parser *current, int *nb, t_shell *shell)
 			{
 				ft_putstr_fd(token[0].content, 2);
 				ft_putstr_fd(": command not found\n", 2);
+				shell->exit_status = 127;
 				(*nb)++;
 				return (1);
 			}
@@ -101,7 +103,10 @@ t_parser	*create_parser(t_token *token, t_shell *shell)
 		if (token[nb].type == TOKEN_WORD)
 		{
 			if (cmd_or_file(token, current, &nb, shell) == 1)
+			{
+				free (parser);
 				return(NULL);
+			}
 		}
 		else if (is_redirect(token, &nb) == 1)
 		{
