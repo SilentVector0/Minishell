@@ -5,10 +5,10 @@ t_redir	*new_redir_node(void)
 {
 	t_redir *redir;
 
-	redir = malloc(sizeof(t_parser));
+	redir = malloc(sizeof(t_redir));
 	if (!redir)
 		return (NULL);
-	redir = ft_memset(redir, 0, sizeof(t_parser));
+	redir = ft_memset(redir, 0, sizeof(t_redir));
 	return (redir);
 }
 

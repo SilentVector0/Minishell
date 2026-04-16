@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 14:44:47 by aroduit           #+#    #+#             */
-/*   Updated: 2026/04/15 15:35:01 by msuter           ###   ########.fr       */
+/*   Updated: 2026/04/16 16:03:01 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strncmp(token[0].content, "exit", 5) == 0)
 			end_prog(imput, token, verif_nb);
 		parser = create_parser(token, shell);
+		// testing(parser);
 		if (parser != NULL)
 		{
 			search_var(parser, shell);
 			execute_cmd(parser, shell);
 		}
-		//testing(parser);
 		free_token(imput, token, verif_nb);
 		free_parser(parser);
 	}
