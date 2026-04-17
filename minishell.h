@@ -1,4 +1,3 @@
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -48,7 +47,7 @@ typedef enum t_enum_redir
 	REDIR_HEREDOC,
 }	t_enum_redir;
 
-typedef struct t_redir t_redir;
+typedef struct t_redir	t_redir;
 typedef struct t_redir
 {
 	int		type;
@@ -57,7 +56,7 @@ typedef struct t_redir
 	t_redir	*r_next;
 }	t_redir;
 
-typedef struct t_parser t_parser;
+typedef struct t_parser	t_parser;
 typedef struct t_parser
 {
 	char		*cmd;
@@ -74,19 +73,19 @@ typedef struct s_shell
 }	t_shell;
 
 //! fonctions generales
-void	case_error(char *imput, t_token *token,
-			char *message_erroor, int nb_token);
-void	case_continue(char *imput, t_token *token, char *message_erroor);
-void	end_prog(char *imput, t_token *token, int nb_token);
-void	free_token(char *imput, t_token *token, int nb_token);
+void		case_error(char *imput, t_token *token,
+				char *message_erroor, int nb_token);
+void		case_continue(char *imput, t_token *token, char *message_erroor);
+void		end_prog(char *imput, t_token *token, int nb_token);
+void		free_token(char *imput, t_token *token, int nb_token);
 
 //! fonctions lexer
-int		is_space(char c);
-int		how_many_tokens(char *imput);
-int		case_word(char *imput, t_contexte *c);
-t_token	*lexing(char *imput, int verif_nb);
-void	case_in_or_heredoc(char *imput, t_contexte *c, t_token *token);
-void	case_out_or_happend(char *imput, t_contexte *c, t_token *token);
+int			is_space(char c);
+int			how_many_tokens(char *imput);
+int			case_word(char *imput, t_contexte *c);
+t_token		*lexing(char *imput, int verif_nb);
+void		case_in_or_heredoc(char *imput, t_contexte *c, t_token *token);
+void		case_out_or_happend(char *imput, t_contexte *c, t_token *token);
 
 //! fonctions parser
 int			is_redirect(t_token *token, int	*nb);
@@ -97,19 +96,18 @@ t_parser	*create_parser(t_token *token, t_shell *shell);
 char		*get_path(char *cmd, char **envp);
 void		free_parser(t_parser *parser);
 void		attrib_redir(t_parser *current, t_redir\
-			**current_redir, t_token *token, int *nb);
+	**current_redir, t_token *token, int *nb);
 void		attrib_pipe(t_parser **current, t_redir **current_redir, int *nb);
 t_redir		*which_type(t_token *token, int *nb);
 
 //! fonctions expander
-void	search_var(t_parser *parser, t_shell *shell);
-char	*filter_dup(char *content);
+void		search_var(t_parser *parser, t_shell *shell);
+char		*filter_dup(char *content);
 
 //! fonction exec
-void	exec_redir(t_redir *redir);
-int		execute_cmd(t_parser *parser, t_shell *shell);
-int		perror_return(char *msg, int ret);
-int		prepare_heredocs(t_parser *parser, t_shell *shell);
-
+void		exec_redir(t_redir *redir);
+int			execute_cmd(t_parser *parser, t_shell *shell);
+int			perror_return(char *msg, int ret);
+int			prepare_heredocs(t_parser *parser, t_shell *shell);
 
 #endif
