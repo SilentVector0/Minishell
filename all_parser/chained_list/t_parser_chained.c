@@ -1,9 +1,8 @@
-
 #include "../minishell.h"
 
 t_parser	*new_node(void)
 {
-	t_parser *parser;
+	t_parser	*parser;
 
 	parser = malloc(sizeof(t_parser));
 	if (!parser)

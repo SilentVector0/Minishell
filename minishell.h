@@ -96,6 +96,10 @@ t_redir		*attach_redir_node(t_redir *current);
 t_parser	*create_parser(t_token *token, t_shell *shell);
 char		*get_path(char *cmd, char **envp);
 void		free_parser(t_parser *parser);
+void		attrib_redir(t_parser *current, t_redir\
+			**current_redir, t_token *token, int *nb);
+void		attrib_pipe(t_parser **current, t_redir **current_redir, int *nb);
+t_redir		*which_type(t_token *token, int *nb);
 
 //! fonctions expander
 void	search_var(t_parser *parser, t_shell *shell);

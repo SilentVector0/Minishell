@@ -1,9 +1,8 @@
-
 #include "../minishell.h"
 
 t_redir	*new_redir_node(void)
 {
-	t_redir *redir;
+	t_redir	*redir;
 
 	redir = malloc(sizeof(t_redir));
 	if (!redir)
@@ -14,8 +13,9 @@ t_redir	*new_redir_node(void)
 
 t_redir	*attach_redir_node(t_redir *current)
 {
-	t_redir *new = new_redir_node();
+	t_redir	*new;
 
+	new = new_redir_node();
 	current->r_next = new;
 	return (new);
 }

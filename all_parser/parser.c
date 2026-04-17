@@ -1,4 +1,3 @@
-
 #include "../minishell.h"
 
 t_redir	*which_type(t_token *token, int *nb)
@@ -39,7 +38,7 @@ void	arg_after_cmd(t_token *token, t_parser *current, int *nb)
 	count = 0;
 	current->arg[count] = ft_strdup(current->cmd);
 	count++;
-	while(*nb != temp)
+	while (*nb != temp)
 	{
 		current->arg[count] = ft_strdup(token[*nb].content);
 		count++;
@@ -55,14 +54,6 @@ int	cmd_or_file(t_token *token, t_parser *current, int *nb, t_shell *shell)
 	if (*nb == 0)
 	{
 		current->cmd = get_path(token[0].content, shell->envp);
-		if (current->cmd == NULL)
-		{
-			ft_putstr_fd(token[0].content, 2);
-			ft_putstr_fd(": command not found\n", 2);
-			shell->exit_status = 127;
-			(*nb)++;
-			return (1);
-		}
 		(*nb)++;
 		arg_after_cmd(token, current, nb);
 	}
@@ -72,14 +63,6 @@ int	cmd_or_file(t_token *token, t_parser *current, int *nb, t_shell *shell)
 		if (is_redirect(token, &test) == 0)
 		{
 			current->cmd = get_path(token[*nb].content, shell->envp);
-			if (current->cmd == NULL)
-			{
-				ft_putstr_fd(token[0].content, 2);
-				ft_putstr_fd(": command not found\n", 2);
-				shell->exit_status = 127;
-				(*nb)++;
-				return (1);
-			}
 			(*nb)++;
 			arg_after_cmd(token, current, nb);
 		}
@@ -96,38 +79,18 @@ t_parser	*create_parser(t_token *token, t_shell *shell)
 
 	parser = new_node();
 	current = parser;
-	
 	nb = 0;
 	while (token[nb].type != TOKEN_END)
 	{
 		if (token[nb].type == TOKEN_WORD)
 		{
 			if (cmd_or_file(token, current, &nb, shell) == 1)
-			{
-				free (parser);
-				return(NULL);
-			}
+				return (free(parser), NULL);
 		}
 		else if (is_redirect(token, &nb) == 1)
-		{
-			if (current->redir == NULL)
-			{
-				current->redir = which_type(token, &nb);
-				current_redir = parser->redir;
-			}
-			else
-			{
-				current_redir->r_next = which_type(token, &nb);
-				current_redir = current_redir->r_next;
-			}
-		}
+			attrib_redir(current, &current_redir, token, &nb);
 		else if (token[nb].type == TOKEN_PIPE)
-		{
-			current->next = new_node();
-			current = current->next;
-			current_redir = NULL;
-			nb++;
-		}
+			attrib_pipe(&current, &current_redir, &nb);
 	}
 	return (parser);
 }

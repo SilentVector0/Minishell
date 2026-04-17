@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void    free_redir(t_parser *parser)
+void	free_redir(t_parser *parser)
 {
 	t_redir	*tmp;
 
