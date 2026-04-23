@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 14:44:47 by aroduit           #+#    #+#             */
-/*   Updated: 2026/04/17 22:37:01 by msuter           ###   ########.fr       */
+/*   Updated: 2026/04/23 17:21:01 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ void	init(t_shell *shell, char **envp)
 	int	i;
 
 	i = 0;
+	if (envp == NULL)
+	{
+		shell->envp = NULL;
+		return ;
+	}
 	while (envp[i])
 		i++;
 	shell->envp = malloc (sizeof(char *) * (i + 1));

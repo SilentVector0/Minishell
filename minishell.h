@@ -104,6 +104,9 @@ void		pass_word(int *temp, int *count, t_token *token);
 //! fonctions expander
 void		search_var(t_parser *parser, t_shell *shell);
 char		*filter_dup(char *content);
+void		init_replace(int *i, int *k, int *l);
+char		*special_case(char **envp, int len);
+int			case_interrog(t_parser *parser, int *new_size, int *i, int *j);
 
 //! fonction exec
 void		exec_redir(t_redir *redir);
