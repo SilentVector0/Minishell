@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 14:44:47 by aroduit           #+#    #+#             */
-/*   Updated: 2026/04/23 17:21:01 by msuter           ###   ########.fr       */
+/*   Updated: 2026/04/30 20:10:39 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,17 @@ void	init(t_shell *shell, char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		shell->envp[i] = ft_strdup(envp[i]);
-		i++;
+		while (envp[i])
+			i++;
+		shell->envp = malloc (sizeof(char *) * (i + 1));
+		i = 0;
+		while (envp[i])
+		{
+			shell->envp[i] = ft_strdup(envp[i]);
+			i++;
+		}
+		shell->envp[i] = NULL;
 	}
-	shell->envp[i] = NULL;
 	shell->exit_status = 0;
 	shell->line_num = 0;
 }
@@ -92,16 +99,15 @@ int	main(int argc, char **argv, char **envp)
 			case_continue(imput, token, "erreur, il manque une quote");
 			continue ;
 		}
-		if (ft_strncmp(token[0].content, "exit", 5) == 0)
-			end_prog(imput, token, verif_nb);
 		parser = create_parser(token, shell);
 		// testing(parser);
 		if (parser != NULL)
 		{
 			search_var(parser, shell);
-			execute_cmd(parser, shell);
+			printf("cmd = [%s]\n", parser->arg[0]);
+			execute_cmd(parser, shell, token, imput);
 		}
-		free_token(imput, token, verif_nb);
+		free_token(imput, token);
 		free_parser(parser);
 	}
 }

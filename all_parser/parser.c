@@ -46,36 +46,30 @@ void	arg_after_cmd(t_token *token, t_parser *current, int *nb)
 	current->arg[count] = NULL;
 }
 
-void	try_path(t_parser *current, t_token *token, int *nb, t_shell *shell)
+void	try_path(t_parser *current, t_token *token, int *nb)
 {
-	current->cmd = get_path(token[*nb].content, shell->envp);
+	current->cmd = ft_strdup(token[*nb].content);
+	current->path = NULL;
 	(*nb)++;
 	arg_after_cmd(token, current, nb);
 }
 
-int	cmd_or_file(t_token *token, t_parser *current, int *nb, t_shell *shell)
+int	cmd_or_file(t_token *token, t_parser *current, int *nb)
 {
 	int	test;
-	int	index;
 
-	index = *nb;
 	if (*nb == 0)
-		try_path(current, token, nb, shell);
+		try_path(current, token, nb);
 	else if (*nb - 1 >= 0)
 	{
 		test = *nb - 1;
 		if (is_redirect(token, &test) == 0)
-			try_path(current, token, nb, shell);
-	}
-	if (current->cmd == NULL)
-	{
-		ft_putstr_fd(token[index].content, 2);
-		ft_putstr_fd(": command not found\n", 2);
+			try_path(current, token, nb);
 	}
 	return (0);
 }
 
-t_parser	*create_parser(t_token *token, t_shell *shell)
+t_parser	*create_parser(t_token *token)
 {
 	int			nb;
 	t_parser	*parser;
@@ -89,7 +83,7 @@ t_parser	*create_parser(t_token *token, t_shell *shell)
 	{
 		if (token[nb].type == TOKEN_WORD)
 		{
-			if (cmd_or_file(token, current, &nb, shell) == 1)
+			if (cmd_or_file(token, current, &nb) == 1)
 				return (free(parser), NULL);
 		}
 		else if (is_redirect(token, &nb) == 1)
