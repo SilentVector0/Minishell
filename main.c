@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 14:44:47 by aroduit           #+#    #+#             */
-/*   Updated: 2026/04/30 20:10:39 by msuter           ###   ########.fr       */
+/*   Created: 2026/04/30 20:50:14 by aroduit           #+#    #+#             */
+/*   Updated: 2026/04/30 20:59:22 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,11 @@ void	init(t_shell *shell, char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		while (envp[i])
-			i++;
-		shell->envp = malloc (sizeof(char *) * (i + 1));
-		i = 0;
-		while (envp[i])
-		{
-			shell->envp[i] = ft_strdup(envp[i]);
-			i++;
-		}
-		shell->envp[i] = NULL;
+		
+		shell->envp[i] = ft_strdup(envp[i]);
+		i++;
 	}
+	shell->envp[i] = NULL;
 	shell->exit_status = 0;
 	shell->line_num = 0;
 }
@@ -99,7 +93,7 @@ int	main(int argc, char **argv, char **envp)
 			case_continue(imput, token, "erreur, il manque une quote");
 			continue ;
 		}
-		parser = create_parser(token, shell);
+		parser = create_parser(token);
 		// testing(parser);
 		if (parser != NULL)
 		{
@@ -110,4 +104,5 @@ int	main(int argc, char **argv, char **envp)
 		free_token(imput, token);
 		free_parser(parser);
 	}
+	free_shell(shell);
 }

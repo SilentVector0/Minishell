@@ -34,6 +34,8 @@ void	free_parser(t_parser *parser)
 	{
 		if (parser->redir)
 			free_redir(parser);
+		if (parser->path)
+			free (parser->path);
 		if (parser->arg)
 			free_tab(parser);
 		if (parser->cmd)
