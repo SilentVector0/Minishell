@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/29 15:09:16 by aroduit           #+#    #+#             */
-/*   Updated: 2026/04/29 15:09:30 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/04/30 02:45:47 by aroduit           #+#    #+#             */
+/*   Updated: 2026/04/30 02:51:58 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,10 @@ int	main(int argc, char **argv, char **envp)
 		if (parser != NULL)
 		{
 			search_var(parser, shell);
+			printf("cmd = [%s]\n", parser->arg[0]);
 			execute_cmd(parser, shell, token, imput);
 		}
-		free_token(imput, token, verif_nb);
+		free_token(imput, token);
 		free_parser(parser);
 	}
 }

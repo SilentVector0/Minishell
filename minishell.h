@@ -63,6 +63,7 @@ typedef struct t_parser	t_parser;
 typedef struct t_parser
 {
 	char		*cmd;
+	char		*path;
 	char		**arg;
 	t_redir		*redir;
 	t_parser	*next;
@@ -96,7 +97,7 @@ int			is_redirect(t_token *token, int	*nb);
 t_parser	*new_node(void);
 t_redir		*new_redir_node(void);
 t_redir		*attach_redir_node(t_redir *current);
-t_parser	*create_parser(t_token *token, t_shell *shell);
+t_parser	*create_parser(t_token *token);
 char		*get_path(char *cmd, char **envp);
 void		free_parser(t_parser *parser);
 void		attrib_redir(t_parser *current, t_redir\
@@ -129,6 +130,7 @@ int			execute_cmd(t_parser *parser, t_shell *shell, t_token *token, char *imput)
 int			perror_return(char *msg, int ret);
 int			prepare_heredocs(t_parser *parser, t_shell *shell);
 void		free_tab_(char **tab);
+int			get_exec(t_parser *parser, t_shell *shell);
 
 //! fonction free
 void		free_all(t_parser *parser, t_shell *shell, t_token *token, char *imput);

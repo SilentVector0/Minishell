@@ -17,13 +17,10 @@ int	child_process(t_parser *current, int fd[2], int *prev_fd, t_shell *shell)
 		exec_redir(current->redir);
 	if (is_builtin(current))
  		exit (exec_builtin(current, shell, NULL, NULL));
-	if (current->cmd == NULL)
-	{
-		shell->exit_status = 127;
+	if (!current->cmd || get_exec(current, shell))
 		exit(127);
-	}
-	execve(current->arg[0], current->arg, shell->envp);
-	perror(current->arg[0]);
+	execve(current->path, current->arg, shell->envp);
+	perror(current->cmd);
 	exit(127);
 }
 
@@ -63,6 +60,21 @@ int	execute_pipeline(t_parser *parser, int *prev_fd, t_shell *shell)
 	while (waitpid(-1, &status, 0) > 0)
 		;
 	return (WEXITSTATUS(status));
+}
+
+int	get_exec(t_parser *parser, t_shell *shell)
+{
+	if (ft_strchr(parser->cmd, '/'))
+		parser->path = ft_strdup(parser->cmd);
+	else
+		parser->path = get_path(parser->cmd, shell->envp);
+	if (!parser->path)
+	{
+		ft_putstr_fd(parser->cmd, 2);
+		ft_putstr_fd(": command not found\n", 2);
+		return (127);
+	}
+	return (0);
 }
 
 int	execute_cmd(t_parser *parser, t_shell *shell, t_token *token, char *imput)
