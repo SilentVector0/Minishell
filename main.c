@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 20:50:14 by aroduit           #+#    #+#             */
-/*   Updated: 2026/04/30 20:59:22 by aroduit          ###   ####lausanne.ch   */
+/*   Updated: 2026/05/04 12:12:11 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	main(int argc, char **argv, char **envp)
 
 	shell = malloc(sizeof(t_shell));
 	init(shell, envp);
+	increm_lvl(shell);
 	(void)argc;
 	(void)argv;
 	while (1)

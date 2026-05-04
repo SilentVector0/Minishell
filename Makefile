@@ -6,7 +6,7 @@
 #    By: msuter <msuter@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/15 11:05:43 by msuter            #+#    #+#              #
-#    Updated: 2026/04/30 20:10:48 by msuter           ###   ########.fr        #
+#    Updated: 2026/05/04 12:13:01 by msuter           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ BUILTIN_SRCS = builtin/builtin_utils.c builtin/builtin.c builtin/ft_cd.c builtin
 				builtin/ft_env.c builtin/ft_exit.c builtin/ft_export.c builtin/ft_pwd.c \
 				builtin/ft_unset.c
 
-SRCS = main.c $(LEXER_SRCS) $(PARSER_SRCS) $(EXEC_SRCS) $(EXPANDER_SRCS) $(BUILTIN_SRCS)
+SRCS = main.c gestion_shlvl.c $(LEXER_SRCS) $(PARSER_SRCS) $(EXEC_SRCS) $(EXPANDER_SRCS) $(BUILTIN_SRCS)
 
 OBJS = $(SRCS:.c=.o)
 
