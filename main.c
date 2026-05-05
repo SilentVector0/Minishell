@@ -31,54 +31,12 @@
 // 	}
 // }
 
-int is_number(t_shell *shell, int i)
-{
-	int	j;
-	char *new;
-
-	j = 5;
-	while (shell->envp[i][j])
-	{
-		if (shell->envp[i][j] >= 48 &&shell->envp[i][j] <= 57)
-			j++;
-		else
-		{
-			free(shell->envp[i]);
-			shell->envp[i] = ft_strdup("SHLVL=0");
-			return (0);
-		}
-	}
-	j = 5;
-	if (ft_atoi(shell->envp[i] + j) >= 9)
-	{
-		new = malloc(sizeof(char) * ft_strlen(shell->envp[i]) + 2);
-		
-	}
-	return (0);
-}
-
-void	increm_lvl(t_shell *shell)
-{
-	int	shlvl;
-	int	i;
-
-	i = 0;
-	while (shell->envp[i])
-	{
-		if (ft_strncmp(shell->envp[i], "SHLVL=", 5) == 0)
-			break ;
-		i++;
-	}
-	is_number(shell, i);
-	
-}
-
 void	init(t_shell *shell, char **envp)
 {
 	int	i;
 
 	i = 0;
-	if (envp == NULL)
+	if (!envp[i])
 	{
 		shell->envp = malloc(sizeof(char *) * 2);
 		shell->envp[0] = ft_strdup("SHLVL=0");
@@ -110,6 +68,7 @@ int	main(int argc, char **argv, char **envp)
 
 	shell = malloc(sizeof(t_shell));
 	init(shell, envp);
+	increm_lvl(shell);
 	(void)argc;
 	(void)argv;
 	while (1)
