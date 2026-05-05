@@ -92,6 +92,7 @@ void		case_error(char *imput, t_token *token,
 void		case_continue(char *imput, t_token *token, char *message_erroor);
 //void		end_prog(char *imput, t_token *token, int nb_token);
 void		free_token(char *imput, t_token *token);
+void		increm_lvl(t_shell *shell);
 
 //! fonctions lexer
 int			is_space(char c);

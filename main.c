@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/30 20:50:14 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/01 02:58:00 by msuter           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../minishell.h"
 
 // void	testing(t_parser *parser)
@@ -122,7 +110,6 @@ int	main(int argc, char **argv, char **envp)
 
 	shell = malloc(sizeof(t_shell));
 	init(shell, envp);
-	
 	(void)argc;
 	(void)argv;
 	while (1)
