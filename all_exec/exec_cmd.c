@@ -87,10 +87,8 @@ int	execute_cmd(t_parser *parser, t_shell *shell, t_token *token, char *imput)
 		shell->exit_status = 1;
 		return (1);
 	}
-	if (is_builtin(parser) && parser->next == NULL)
+	if (is_builtin(parser) && parser->next == NULL && parser->redir == NULL)
 	{
-	 	if (parser->redir)
-	 		exec_redir(parser->redir);
 	 	shell->exit_status = exec_builtin(parser, shell, token, imput);
 	 	return (shell->exit_status);
 	}

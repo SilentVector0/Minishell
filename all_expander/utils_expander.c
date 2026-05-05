@@ -23,6 +23,12 @@ int	verif_and_schr_in_env(t_parser *parser, t_var *var, t_shell *shell)
 			special_var(parser, var->j, shell);
 			return (1);
 		}
+		if (!ft_isalpha(parser->arg[var->j][var->i])
+			&& parser->arg[var->j][var->i + 1] != '_')
+		{
+			var->i++;
+			return (0);
+		}
 		var->len = count_len(parser->arg[var->j] + var->i);
 		var->tmp = ft_substr(parser->arg[var->j], var->i, var->len);
 		var->var = ft_strjoin(var->tmp, "=");
