@@ -2,11 +2,18 @@
 
 void	pass_word(int *temp, int *count, t_token *token)
 {
-	while (token[*temp].type == TOKEN_WORD)
-	{
-		(*temp)++;
-		(*count)++;
-	}
+	while (token[*temp].type != TOKEN_END && token[*temp].type != TOKEN_PIPE)
+    {
+        if (is_redirect(token, temp))
+            *temp += 2;
+        else if (token[*temp].type == TOKEN_WORD)
+        {
+            (*temp)++;
+            (*count)++;
+        }
+        else
+            (*temp)++;
+    }
 }
 
 void	attrib_pipe(t_parser **current, t_redir **current_redir, int *nb)

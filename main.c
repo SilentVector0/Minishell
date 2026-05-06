@@ -58,6 +58,45 @@ void	init(t_shell *shell, char **envp)
 	shell->line_num = 0;
 }
 
+void    filter_all_args(t_parser *parser)
+{
+    t_parser    *current;
+    int         i;
+    char        *tmp;
+
+    current = parser;
+    while (current)
+    {
+        i = 0;
+        if (current->arg)
+        {
+            while (current->arg[i])
+            {
+                char *a = current->arg[i];
+   				int len = ft_strlen(a);
+   				if (len >= 2 && ((a[0] == '"' && a[len-1] == '"') 
+        			|| (a[0] == '\'' && a[len-1] == '\'')))
+    			{
+       				tmp = filter_dup(current->arg[i]);
+        			free(current->arg[i]);
+        			current->arg[i] = tmp;
+    			}
+    			i++;
+            }
+        }
+        if (current->cmd)
+        {
+            if (ft_strchr(current->cmd, '\'') || ft_strchr(current->cmd, '\"'))
+            {
+                tmp = filter_dup(current->cmd);
+                free(current->cmd);
+                current->cmd = tmp;
+            }
+        }
+        current = current->next;
+    }
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_token		*token;
@@ -65,6 +104,7 @@ int	main(int argc, char **argv, char **envp)
 	char		*imput;
 	int			verif_nb;
 	t_shell		*shell;
+	int			i;
 
 	shell = malloc(sizeof(t_shell));
 	init(shell, envp);
@@ -77,6 +117,11 @@ int	main(int argc, char **argv, char **envp)
 		if (!imput)
 			case_error(imput, NULL, "erreur lors du malloc du imput", verif_nb);
 		add_history(imput);
+		if (imput[0] == '\0')
+		{
+   			free(imput);
+    		continue ;
+		}
 		verif_nb = how_many_tokens(imput);
 		token = lexing(imput, verif_nb);
 		if (token == NULL)
@@ -89,6 +134,36 @@ int	main(int argc, char **argv, char **envp)
 		if (parser != NULL)
 		{
 			search_var(parser, shell);
+			filter_all_args(parser);
+			if (parser->arg && parser->arg[0])
+			{
+    			free(parser->cmd);
+    			parser->cmd = ft_strdup(parser->arg[0]);
+			}
+			if (parser->cmd && parser->cmd[0] == '\0')
+            {
+				i = 0;
+                if (parser->arg && parser->arg[1])
+                {
+                    i = 0;
+                    free(parser->arg[0]);
+                    while (parser->arg[i + 1])
+                    {
+                        parser->arg[i] = parser->arg[i + 1];
+                        i++;
+                    }
+                    parser->arg[i] = NULL;
+                    free(parser->cmd);
+                    parser->cmd = ft_strdup(parser->arg[0]);
+                }
+                else
+                {
+                    shell->exit_status = 0;
+                    free_token(imput, token);
+                    free_parser(parser);
+                    continue ;
+                }
+            }
 			execute_cmd(parser, shell, token, imput);
 		}
 		free_token(imput, token);

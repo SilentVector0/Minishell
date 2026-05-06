@@ -56,22 +56,22 @@ int	case_word(char *imput, t_contexte *c)
 	int	temp;
 
 	temp = c->i + c->size_word;
-	if (imput[temp] == '\'')
+	while (imput[temp] && imput[temp] != ' ' && imput[temp] != '|'
+		&& imput[temp] != '<' && imput[temp] != '>' && !is_space(imput[temp]))
 	{
-		c->size_word++;
-		if (case_single_quote(imput, c) == 0)
-			return (0);
-	}
-	else if (imput[temp] == '\"')
-	{
-		c->size_word++;
-		if (case_double_quote(imput, c) == 0)
-			return (0);
-	}
-	else
-	{
-		case_no_quotes(imput, c);
-		return (0);
-	}
-	return (-1);
+		 if (imput[temp] == '\'')
+        {
+            c->size_word++;
+            case_single_quote(imput, c);
+        }
+        else if (imput[temp] == '\"')
+        {
+            c->size_word++;
+            case_double_quote(imput, c);
+        }
+        else
+            case_no_quotes(imput, c);
+        temp = c->i + c->size_word;
+    }
+    return (0);
 }

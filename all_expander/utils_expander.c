@@ -71,8 +71,7 @@ int	case_interrog(t_parser *parser, int *new_size, int *i, int *j)
 	{
 		if (parser->arg[*j][(*i) + 1] == '?')
 		{
-			if (parser->arg[*j][(*i) + 2] != '\0')
-				(*i) += 2;
+			(*i) += 2;
 			*new_size = 0;
 			return (1);
 		}

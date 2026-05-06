@@ -76,12 +76,12 @@ void	special_var(t_parser *parser, int j, t_shell *shell)
 	int		new_size;
 	int		k;
 
-	i = -1;
+	i = 0;
 	k = 0;
 	tmp = ft_itoa(shell->exit_status);
 	new_size = ft_strlen(tmp) + ft_strlen(parser->arg[j]) - 2;
 	new = malloc(sizeof(char) * new_size + 1);
-	while (parser->arg[j][++i])
+	while (parser->arg[j][i])
 	{
 		if (case_interrog(parser, &new_size, &i, &j) == 1)
 		{
@@ -89,9 +89,9 @@ void	special_var(t_parser *parser, int j, t_shell *shell)
 			k += ft_strlen(tmp);
 		}
 		else
-			new[k++] = parser->arg[j][i];
+			new[k++] = parser->arg[j][i++];
 	}
-	new[k - 1] = '\0';
+	new[k] = '\0';
 	free (parser->arg[j]);
 	free(tmp);
 	parser->arg[j] = new;

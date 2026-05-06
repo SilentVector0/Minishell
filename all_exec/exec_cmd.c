@@ -20,6 +20,23 @@ int	child_process(t_parser *current, int fd[2], int *prev_fd, t_shell *shell)
 	if (!current->cmd || get_exec(current, shell))
 		exit(127);
 	execve(current->path, current->arg, shell->envp);
+	if (access(current->path, X_OK) == 0)
+	{
+    // fichier existe et est exécutable mais execve a quand même échoué = dossier
+    	ft_putstr_fd(current->path, 2);
+    	ft_putstr_fd(": Is a directory\n", 2);
+    		exit(126);
+	}
+	else
+	{
+    // pas exécutable = permission denied
+    	if (access(current->path, F_OK) == 0)
+    	{
+        	ft_putstr_fd(current->path, 2);
+        	ft_putstr_fd(": Permission denied\n", 2);
+        	exit(126);
+    	}
+	}
 	perror(current->cmd);
 	exit(127);
 }

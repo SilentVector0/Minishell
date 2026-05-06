@@ -14,38 +14,38 @@ t_redir	*which_type(t_token *token, int *nb)
 	else
 		temp->type = REDIR_HEREDOC;
 	(*nb)++;
-	temp->file = ft_strdup(token[*nb].content);
+	temp->file = filter_dup(ft_strdup(token[*nb].content));
 	temp->heredoc_fd = -1;
 	(*nb)++;
 	return (temp);
 }
 
-void	arg_after_cmd(t_token *token, t_parser *current, int *nb)
+void    arg_after_cmd(t_token *token, t_parser *current, int *nb)
 {
-	int	temp;
-	int	count;
+    int temp;
+    int count;
 
-	count = 0;
-	temp = *nb;
-	pass_word(&temp, &count, token);
-	current->arg = malloc(sizeof(char *) * (count + 2));
-	if (!current->arg)
-		return ;
-	count = 0;
-	if (current->cmd == NULL)
-		current->arg[count] = NULL;
-	else
-		current->arg[count] = ft_strdup(current->cmd);
-	count++;
-	while (*nb != temp)
-	{
-		current->arg[count] = ft_strdup(token[*nb].content);
-		count++;
-		(*nb)++;
-	}
-	current->arg[count] = NULL;
+    count = 0;
+    temp = *nb;
+    pass_word(&temp, &count, token);  // temp va jusqu'au PIPE/END, compte tout
+    current->arg = malloc(sizeof(char *) * (count + 2));
+    if (!current->arg)
+        return ;
+    count = 0;
+    if (current->cmd == NULL)
+        current->arg[count] = NULL;
+    else
+        current->arg[count] = ft_strdup(current->cmd);
+    count++;
+    // nb avance seulement sur les TOKEN_WORD consécutifs comme avant
+    while (token[*nb].type == TOKEN_WORD)
+    {
+        current->arg[count] = ft_strdup(token[*nb].content);
+        count++;
+        (*nb)++;
+    }
+    current->arg[count] = NULL;
 }
-
 void	try_path(t_parser *current, t_token *token, int *nb)
 {
 	current->cmd = ft_strdup(token[*nb].content);
@@ -54,19 +54,31 @@ void	try_path(t_parser *current, t_token *token, int *nb)
 	arg_after_cmd(token, current, nb);
 }
 
-int	cmd_or_file(t_token *token, t_parser *current, int *nb)
+int cmd_or_file(t_token *token, t_parser *current, int *nb)
 {
-	int	test;
+    int test;
+    int count;
 
-	if (*nb == 0)
-		try_path(current, token, nb);
-	else if (*nb - 1 >= 0)
-	{
-		test = *nb - 1;
-		if (is_redirect(token, &test) == 0)
-			try_path(current, token, nb);
-	}
-	return (0);
+    if (current->cmd != NULL)
+    {
+        // trouver la fin de arg et ajouter
+        count = 0;
+        while (current->arg[count])
+            count++;
+        current->arg[count] = ft_strdup(token[*nb].content);
+        current->arg[count + 1] = NULL;
+        (*nb)++;
+        return (0);
+    }
+    if (*nb == 0)
+        try_path(current, token, nb);
+    else if (*nb - 1 >= 0)
+    {
+        test = *nb - 1;
+        if (is_redirect(token, &test) == 0)
+            try_path(current, token, nb);
+    }
+    return (0);
 }
 
 t_parser	*create_parser(t_token *token)

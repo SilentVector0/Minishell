@@ -22,27 +22,50 @@ static int	which_case(char *imput, t_contexte *c, t_token *token)
 	return (verif_quote);
 }
 
-static int	set_token(char *imput, t_token *token, t_contexte *c)
+static int set_token(char *imput, t_token *token, t_contexte *c)
 {
-	while (is_space(imput[c->i]))
-		c->i++;
-	which_case(imput, c, token);
-	if (c->size_word > 0 && (imput[c->i + c->size_word] == '\0'
-			|| imput[c->i + c->size_word] == ' '
-			|| imput[c->i + c->size_word] == '|'
-			|| imput[c->i + c->size_word] == '<'
-			|| imput[c->i + c->size_word] == '>'))
-	{
-		token[c->nb].content = malloc(sizeof(char) * c->size_word + 1);
-		ft_strlcpy(token[c->nb].content, imput + c->i, c->size_word + 1);
-		token[c->nb].type = TOKEN_WORD;
-		c->nb++;
-		if (imput[c->size_word - 1] == '\0')
-			return (1);
-		c->i += c->size_word;
-		c->size_word = 0;
-	}
-	return (0);
+    while (is_space(imput[c->i]))
+        c->i++;
+    if (imput[c->i] == '|' || imput[c->i] == '<' || imput[c->i] == '>')
+    {
+        which_case(imput, c, token);
+        return (0);
+    }
+    // calculer size_word comme mid calcule i
+    while (imput[c->i + c->size_word] && !is_space(imput[c->i + c->size_word])
+        && imput[c->i + c->size_word] != '|'
+        && imput[c->i + c->size_word] != '<'
+        && imput[c->i + c->size_word] != '>')
+    {
+        if (imput[c->i + c->size_word] == '\'')
+        {
+            c->size_word++;
+            while (imput[c->i + c->size_word] && imput[c->i + c->size_word] != '\'')
+                c->size_word++;
+            if (imput[c->i + c->size_word] == '\'')
+                c->size_word++;
+        }
+        else if (imput[c->i + c->size_word] == '\"')
+        {
+            c->size_word++;
+            while (imput[c->i + c->size_word] && imput[c->i + c->size_word] != '\"')
+                c->size_word++;
+            if (imput[c->i + c->size_word] == '\"')
+                c->size_word++;
+        }
+        else
+            c->size_word++;
+    }
+    if (c->size_word > 0)
+    {
+        token[c->nb].content = malloc(sizeof(char) * c->size_word + 1);
+        ft_strlcpy(token[c->nb].content, imput + c->i, c->size_word + 1);
+        token[c->nb].type = TOKEN_WORD;
+        c->nb++;
+        c->i += c->size_word;
+        c->size_word = 0;
+    }
+    return (0);
 }
 
 t_token	*lexing(char *imput, int verif_nb)

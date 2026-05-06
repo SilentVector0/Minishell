@@ -22,6 +22,8 @@ int	ft_cd(t_parser *parser, t_shell *shell)
 	char	*target;
 	int		i;
 
+	if (parser->arg[2])
+		return (ft_putstr_fd(" too many arguments\n", 2), 1);
 	if (!parser->arg[1])
 	{
 		i = find_env(shell->envp, "HOME");
@@ -34,7 +36,7 @@ int	ft_cd(t_parser *parser, t_shell *shell)
 	if (change_pwd(shell, "OLDPWD="))
 		return (1);
 	if (chdir(target) == -1)
-		return (perror(target), 2);
+		return (perror(target), 1);
 	if (change_pwd(shell, "PWD="))
 		return (1);
 	return (0);
