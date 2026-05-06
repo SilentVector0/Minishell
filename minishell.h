@@ -132,19 +132,22 @@ void		free_my_var(t_parser *parser, t_var *var);
 int			find_env(char **envp, char *var);
 int			ft_strcmp(const char *s1, const char *s2);
 int			is_builtin(t_parser *parser);
-int			exec_builtin(t_parser *parser, t_shell *shell, t_token *token, char *imput);
+int			exec_builtin(t_parser *parser, t_shell *shell,
+				t_token *token, char *imput);
 int			ft_cd(t_parser *parser, t_shell *shell);
 int			ft_echo(t_parser *parser);
 int			ft_env(t_shell *shell);
-int			ft_exit(t_parser *parser, t_shell *shell, t_token *token, char *imput);
-int 		ft_export(t_parser *parser, t_shell *shell);
+int			ft_exit(t_parser *parser, t_shell *shell,
+				t_token *token, char *imput);
+int			ft_export(t_parser *parser, t_shell *shell);
 int			ft_pwd(void);
 int			ft_unset(t_parser *parser, t_shell *shell);
 char		**change_var(char **envp, char *var, int i_envp);
 
 //! fonction exec
 void		exec_redir(t_redir *redir);
-int			execute_cmd(t_parser *parser, t_shell *shell, t_token *token, char *imput);
+int			execute_cmd(t_parser *parser, t_shell *shell,
+				t_token *token, char *imput);
 int			perror_return(char *msg, int ret);
 int			prepare_heredocs(t_parser *parser, t_shell *shell);
 void		free_tab_(char **tab);
@@ -152,12 +155,14 @@ int			get_exec(t_parser *parser, t_shell *shell);
 void		echec_cmd(t_parser *current);
 
 //! fonction free
-void		free_all(t_parser *parser, t_shell *shell, t_token *token, char *imput);
+void		free_all(t_parser *parser, t_shell *shell,
+				t_token *token, char *imput);
 void		free_shell(t_shell *shell);
 void		free_tab(t_parser *parser);
 
 //!fonction main
-int			parser_diff_null(t_parser *parser, t_shell *shell, t_token *token, char *imput);
+int			parser_diff_null(t_parser *parser, t_shell *shell,
+				t_token *token, char *imput);
 int			verif_imput_and_parser(char *imput, t_token **token);
 
 #endif

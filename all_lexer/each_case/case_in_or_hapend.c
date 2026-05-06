@@ -1,4 +1,3 @@
-
 #include "../minishell.h"
 
 static int	case_hapend(char *imput, t_contexte *c, t_token *token)

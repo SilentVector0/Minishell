@@ -1,4 +1,3 @@
-
 #include "../minishell.h"
 
 static int	which_case(char *imput, t_contexte *c, t_token *token)

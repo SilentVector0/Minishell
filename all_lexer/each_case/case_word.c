@@ -1,4 +1,3 @@
-
 #include "../minishell.h"
 
 static int	case_single_quote(char *imput, t_contexte *c)
