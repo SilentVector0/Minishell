@@ -1,16 +1,17 @@
 #include "minishell.h"
 
-int verif_and_add(t_shell *shell, int i)
+int	verif_and_add(t_shell *shell, int i)
 {
-	int	j;
-	int	value;
-	char *new;
-	char *temp;
+	int		j;
+	int		value;
+	char	*new;
+	char	*temp;
 
 	j = 6;
 	while (shell->envp[i][j])
 	{
-		if ((ft_isdigit(shell->envp[i][j]) == 0) || ft_atoi(shell->envp[i] + 6) < 0)
+		if ((ft_isdigit(shell->envp[i][j]) == 0)
+			|| ft_atoi(shell->envp[i] + 6) < 0)
 		{
 			free(shell->envp[i]);
 			shell->envp[i] = ft_strdup("SHLVL=0");
