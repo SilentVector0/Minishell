@@ -80,7 +80,7 @@ t_token	*lexing(char *imput, int verif_nb)
 		return (NULL);
 	token = malloc(sizeof(t_token) * (verif_nb + 1));
 	if (!token)
-		case_error(imput, token, "erreur lors du malloc du token", verif_nb);
+		case_error(imput, token, "erreur lors du malloc du token");
 	while (imput[c.i])
 	{
 		if (set_token(imput, token, &c) == 1)

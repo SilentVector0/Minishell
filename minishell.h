@@ -88,7 +88,7 @@ typedef struct s_var
 
 //! fonctions generales
 void		case_error(char *imput, t_token *token,
-				char *message_erroor, int nb_token);
+				char *message_erroor);
 void		case_continue(char *imput, t_token *token, char *message_erroor);
 //void		end_prog(char *imput, t_token *token, int nb_token);
 void		free_token(char *imput, t_token *token);
@@ -157,6 +157,7 @@ void		free_shell(t_shell *shell);
 void		free_tab(t_parser *parser);
 
 //!fonction main
-
+int			parser_diff_null(t_parser *parser, t_shell *shell, t_token *token, char *imput);
+int			verif_imput_and_parser(char *imput, t_token **token);
 
 #endif
