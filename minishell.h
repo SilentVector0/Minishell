@@ -149,9 +149,11 @@ int			perror_return(char *msg, int ret);
 int			prepare_heredocs(t_parser *parser, t_shell *shell);
 void		free_tab_(char **tab);
 int			get_exec(t_parser *parser, t_shell *shell);
+void		echec_cmd(t_parser *current);
 
 //! fonction free
 void		free_all(t_parser *parser, t_shell *shell, t_token *token, char *imput);
 void		free_shell(t_shell *shell);
+void		free_tab(t_parser *parser);
 
 #endif

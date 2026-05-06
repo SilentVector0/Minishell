@@ -16,28 +16,11 @@ int	child_process(t_parser *current, int fd[2], int *prev_fd, t_shell *shell)
 	if (current->redir)
 		exec_redir(current->redir);
 	if (is_builtin(current))
- 		exit (exec_builtin(current, shell, NULL, NULL));
+		exit (exec_builtin(current, shell, NULL, NULL));
 	if (!current->cmd || get_exec(current, shell))
 		exit(127);
 	execve(current->path, current->arg, shell->envp);
-	if (access(current->path, X_OK) == 0)
-	{
-    // fichier existe et est exécutable mais execve a quand même échoué = dossier
-    	ft_putstr_fd(current->path, 2);
-    	ft_putstr_fd(": Is a directory\n", 2);
-    		exit(126);
-	}
-	else
-	{
-    // pas exécutable = permission denied
-    	if (access(current->path, F_OK) == 0)
-    	{
-        	ft_putstr_fd(current->path, 2);
-        	ft_putstr_fd(": Permission denied\n", 2);
-        	exit(126);
-    	}
-	}
-	perror(current->cmd);
+	echec_cmd(current);
 	exit(127);
 }
 
@@ -106,8 +89,8 @@ int	execute_cmd(t_parser *parser, t_shell *shell, t_token *token, char *imput)
 	}
 	if (is_builtin(parser) && parser->next == NULL && parser->redir == NULL)
 	{
-	 	shell->exit_status = exec_builtin(parser, shell, token, imput);
-	 	return (shell->exit_status);
+		shell->exit_status = exec_builtin(parser, shell, token, imput);
+		return (shell->exit_status);
 	}
 	shell->exit_status = execute_pipeline(parser, &prev_fd, shell);
 	if (prev_fd != -1)

@@ -7,7 +7,8 @@ void	warning_msg_heredoc(t_redir	*redir, int line_num)
 	num = ft_itoa(line_num);
 	if (!num)
 	{
-		ft_putstr_fd("warning: here-document delimited by end-of-file (wanted `", 2);
+		ft_putstr_fd("warning: here-document \
+			delimited by end-of-file (wanted `", 2);
 		ft_putstr_fd(redir->file, 2);
 		ft_putstr_fd("')\n", 2);
 		return ;
@@ -32,11 +33,11 @@ void	heredoc_loop(int fd, t_redir *redir, t_shell *shell)
 		shell->line_num++;
 		if (!line)
 		{
-			warning_msg_heredoc(redir, line_num);
-			break;
+			warning_msg_heredoc (redir, line_num);
+			break ;
 		}
-		if (ft_strncmp(line, redir->file, ft_strlen(redir->file)) == 0)
-			break;
+		if (ft_strncmp (line, redir->file, ft_strlen(redir->file)) == 0)
+			break ;
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
@@ -45,7 +46,7 @@ void	heredoc_loop(int fd, t_redir *redir, t_shell *shell)
 		free(line);
 }
 
-int prepare_one_heredoc(t_redir *redir, t_shell *shell)
+int	prepare_one_heredoc(t_redir *redir, t_shell *shell)
 {
 	int		fd[2];
 
