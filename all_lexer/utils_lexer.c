@@ -10,9 +10,10 @@ int	is_space(char c)
 }
 
 void	case_error(char *imput, t_token *token,
-	char *message_erroor, int nb_token)
+	char *message_erroor)
 {
 	int	i;
+	int	nb_token;
 
 	nb_token = how_many_tokens(imput);
 	i = 0;
