@@ -32,10 +32,10 @@ int	is_valid_identifier(char *str)
 	i = 0;
 	if (!str || str[i] == '=' || ((!ft_isalpha(str[i])) && str[i] != '_'))
 	{
-			ft_putstr_fd("minishell: export: `", 2);
-			ft_putstr_fd(str, 2);
-			ft_putstr_fd("': not a valid identifier\n", 2);
-			return (1);
+		ft_putstr_fd("minishell: export: `", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
+		return (1);
 	}
 	while (str[i] && str[i] != '=')
 	{
@@ -51,7 +51,7 @@ int	is_valid_identifier(char *str)
 	return (0);
 }
 
-int ft_export(t_parser *parser, t_shell *shell)
+int	ft_export(t_parser *parser, t_shell *shell)
 {
 	int		i;
 	int		i_envp;

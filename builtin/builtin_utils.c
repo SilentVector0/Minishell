@@ -2,8 +2,8 @@
 
 int	find_env(char **envp, char *var)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 	char	*equal;
 
 	equal = ft_strchr(var, '=');
@@ -13,12 +13,12 @@ int	find_env(char **envp, char *var)
 		len = ft_strlen(var);
 	i = -1;
 	while (envp[++i])
-		if (!ft_strncmp(envp[i], var, len) &&  envp[i][len] == '=')
+		if (!ft_strncmp(envp[i], var, len) && envp[i][len] == '=')
 			return (i);
 	return (-1);
 }
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 && *s1 == *s2)
 	{

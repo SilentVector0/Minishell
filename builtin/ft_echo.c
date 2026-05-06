@@ -20,6 +20,6 @@ int	ft_echo(t_parser *parser)
 		i++;
 	}
 	if (newline)
-		ft_putstr_fd("\n",1);
+		ft_putstr_fd ("\n", 1);
 	return (0);
 }
