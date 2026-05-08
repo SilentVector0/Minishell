@@ -18,6 +18,10 @@
 # define INT_MAX				2147483647
 # define INT_MIN				-2147483648
 
+typedef struct t_redir	t_redir;
+typedef struct t_parser	t_parser;
+extern int				g_signal;
+
 typedef enum e_token
 {
 	TOKEN_WORD,
@@ -50,7 +54,6 @@ typedef enum t_enum_redir
 	REDIR_HEREDOC,
 }	t_enum_redir;
 
-typedef struct t_redir	t_redir;
 typedef struct t_redir
 {
 	int		type;
@@ -59,7 +62,6 @@ typedef struct t_redir
 	t_redir	*r_next;
 }	t_redir;
 
-typedef struct t_parser	t_parser;
 typedef struct t_parser
 {
 	char		*cmd;
@@ -153,6 +155,9 @@ int			prepare_heredocs(t_parser *parser, t_shell *shell);
 void		free_tab_(char **tab);
 int			get_exec(t_parser *parser, t_shell *shell);
 void		echec_cmd(t_parser *current);
+int			child_process(t_parser *current, int fd[2],
+				int *prev_fd, t_shell *shell);
+void		parent_process(t_parser *current, int fd[2], int *prev_fd);
 
 //! fonction free
 void		free_all(t_parser *parser, t_shell *shell,
@@ -164,5 +169,6 @@ void		free_tab(t_parser *parser);
 int			parser_diff_null(t_parser *parser, t_shell *shell,
 				t_token *token, char *imput);
 int			verif_imput_and_parser(char *imput, t_token **token);
+void		parent_signals(void);
 
 #endif

@@ -13,7 +13,7 @@ void	warning_msg_heredoc(t_redir	*redir, int line_num)
 		ft_putstr_fd("')\n", 2);
 		return ;
 	}
-	ft_putstr_fd("warning: here-document at line ", 2);
+	ft_putstr_fd("bash: warning: here-document at line ", 2);
 	ft_putstr_fd(num, 2);
 	free (num);
 	ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
@@ -32,7 +32,7 @@ void	heredoc_loop(int fd, t_redir *redir, t_shell *shell)
 		line = readline("> ");
 		shell->line_num++;
 		if (!line)
-		{
+		{ 
 			warning_msg_heredoc (redir, line_num);
 			break ;
 		}

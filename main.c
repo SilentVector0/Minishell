@@ -1,5 +1,14 @@
 #include "../minishell.h"
 
+int	g_signal = 0;
+
+void	exit_d(t_shell *shell)
+{
+	write(1, "exit\n", 5);
+	free_shell(shell);
+	exit(0);
+}
+
 void	free_each_loop(char *imput, t_token *token, t_parser *parser)
 {
 	free_token(imput, token);
@@ -53,11 +62,12 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	shell = init_my_tshell(envp);
 	token = NULL;
+	parent_signals();
 	while (1)
 	{
 		imput = readline("minishell>");
 		if (!imput)
-			case_error(imput, NULL, "erreur lors du malloc du imput");
+			exit_d(shell);
 		add_history(imput);
 		if (verif_imput_and_parser(imput, &token) != 0)
 			continue ;
