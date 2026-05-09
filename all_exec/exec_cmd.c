@@ -83,14 +83,13 @@ int	execute_cmd(t_parser *parser, t_shell *shell, t_token *token, char *imput)
 {
 	int	prev_fd;
 
-	printf("[DEBUG] ENTER execute_cmd | cmd=%s | redir=%p | next=%p\n",
-    parser && parser->cmd ? parser->cmd : "NULL",
-    (void *)parser->redir,
-    (void *)parser->next);
 	prev_fd = -1;
 	if (prepare_heredocs(parser, shell))
 	{
-		shell->exit_status = 1;
+		if (g_signal == SIGINT)
+			shell->exit_status = 130;
+		else
+			shell->exit_status = 1;
 		return (1);
 	}
 	if (is_builtin(parser) && parser->next == NULL && parser->redir == NULL)

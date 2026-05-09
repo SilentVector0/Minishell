@@ -14,9 +14,7 @@
 # include <string.h>
 # include <sys/ioctl.h>
 # include "libft/libft.h"
-
-# define INT_MAX				2147483647
-# define INT_MIN				-2147483648
+# include <limits.h>
 
 typedef struct t_redir	t_redir;
 typedef struct t_parser	t_parser;
@@ -158,6 +156,7 @@ void		echec_cmd(t_parser *current);
 int			child_process(t_parser *current, int fd[2],
 				int *prev_fd, t_shell *shell);
 void		parent_process(t_parser *current, int fd[2], int *prev_fd);
+void		handle_heredoc_sigint(int sig);
 
 //! fonction free
 void		free_all(t_parser *parser, t_shell *shell,
@@ -170,5 +169,6 @@ int			parser_diff_null(t_parser *parser, t_shell *shell,
 				t_token *token, char *imput);
 int			verif_imput_and_parser(char *imput, t_token **token);
 void		parent_signals(void);
+void		handle_sigint(int sig);
 
 #endif

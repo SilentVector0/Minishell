@@ -32,28 +32,43 @@ void	heredoc_loop(int fd, t_redir *redir, t_shell *shell)
 		line = readline("> ");
 		shell->line_num++;
 		if (!line)
-		{ 
-			warning_msg_heredoc (redir, line_num);
+		{
+			if (g_signal != SIGINT)
+				warning_msg_heredoc (redir, line_num);
 			break ;
 		}
-		if (ft_strncmp (line, redir->file, ft_strlen(redir->file)) == 0)
+		if (ft_strcmp (line, redir->file) == 0)
+		{
+			free(line);
 			break ;
+		}
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
 	}
-	if (line)
-		free(line);
 }
 
 int	prepare_one_heredoc(t_redir *redir, t_shell *shell)
 {
 	int		fd[2];
+	int		stdin_copy;
 
 	if (pipe(fd) == -1)
 		return (perror_return("pipe", 2));
+	stdin_copy = dup(STDIN_FILENO);
+	g_signal = 0;
+	signal(SIGINT, handle_heredoc_sigint);
 	heredoc_loop(fd[1], redir, shell);
+	dup2(stdin_copy, STDIN_FILENO);
+	close(stdin_copy);
+	signal(SIGINT, handle_sigint);
 	close(fd[1]);
+	if (g_signal == SIGINT)
+	{
+		close(fd[0]);
+		shell->exit_status = 130;
+		return (1);
+	}
 	redir->heredoc_fd = fd[0];
 	return (0);
 }

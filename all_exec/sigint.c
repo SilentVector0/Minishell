@@ -1,5 +1,13 @@
 #include "../minishell.h"
 
+void	handle_heredoc_sigint(int sig)
+{
+	(void)sig;
+	g_signal = SIGINT;
+	write(1, "\n", 1);
+	close (STDIN_FILENO);
+}
+
 void	handle_sigint(int sig)
 {
 	g_signal = sig;
