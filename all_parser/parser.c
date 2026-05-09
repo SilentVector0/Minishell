@@ -80,6 +80,8 @@ int	cmd_or_file(t_token *token, t_parser *current, int *nb)
 	return (0);
 }
 
+
+
 t_parser	*create_parser(t_token *token)
 {
 	int			nb;

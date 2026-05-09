@@ -167,7 +167,7 @@ void		free_tab(t_parser *parser);
 //!fonction main
 int			parser_diff_null(t_parser *parser, t_shell *shell,
 				t_token *token, char *imput);
-int			verif_imput_and_parser(char *imput, t_token **token);
+int			verif_imput_and_parser(char *imput, t_token **token, t_shell *shell);
 void		parent_signals(void);
 void		handle_sigint(int sig);
 

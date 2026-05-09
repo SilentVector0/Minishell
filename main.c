@@ -69,7 +69,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!imput)
 			exit_d(shell);
 		add_history(imput);
-		if (verif_imput_and_parser(imput, &token) != 0)
+		if (verif_imput_and_parser(imput, &token, shell) != 0)
 			continue ;
 		parser = create_parser(token);
 		if (parser != NULL)
