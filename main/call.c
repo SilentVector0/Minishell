@@ -88,40 +88,6 @@ int	parser_diff_null(t_parser *parser, t_shell *shell,
 	return (0);
 }
 
-int	verif_syntax(char *imput, t_token *token, t_shell *shell)
-{
-	int	nb;
-
-	nb = 0;
-	if (token[nb].type == TOKEN_PIPE)
-	{
-		ft_putstr_fd("minishell: syntax error near unexpected token ", 2);
-		ft_putstr_fd("<< ", 2);
-		ft_putstr_fd(imput, 2);
-		ft_putstr_fd(" >>\n", 2);
-		shell->exit_status = 2;
-		return (1);
-	}
-	while (token[nb].type != TOKEN_END)
-	{
-		if (is_redirect(token, &nb) == 1)
-		{
-			nb++;
-			if (token[nb].type != TOKEN_WORD || is_redirect(token, &nb) != 1)
-			{
-				ft_putstr_fd("minishell: syntax error near unexpected token ", 2);
-				ft_putstr_fd("<< ", 2);
-				ft_putstr_fd(imput, 2);
-				ft_putstr_fd(" >>\n", 2);
-				shell->exit_status = 2;
-				return (1);
-			}
-		}
-		nb++;
-	}
-	return (0);
-}
-
 int	verif_imput_and_parser(char *imput, t_token **token, t_shell *shell)
 {
 	int	i;

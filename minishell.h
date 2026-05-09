@@ -170,5 +170,6 @@ int			parser_diff_null(t_parser *parser, t_shell *shell,
 int			verif_imput_and_parser(char *imput, t_token **token, t_shell *shell);
 void		parent_signals(void);
 void		handle_sigint(int sig);
+int			verif_syntax(char *imput, t_token *token, t_shell *shell);
 
 #endif

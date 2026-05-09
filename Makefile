@@ -6,7 +6,7 @@
 #    By: msuter <msuter@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/15 11:05:43 by msuter            #+#    #+#              #
-#    Updated: 2026/05/09 14:46:06 by msuter           ###   ########.fr        #
+#    Updated: 2026/05/09 17:51:57 by msuter           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,10 @@ EXEC_SRCS = all_exec/exec_cmd.c all_exec/exec_heredoc.c all_exec/exec_redir.c \
 BUILTIN_SRCS = builtin/builtin_utils.c builtin/builtin.c builtin/ft_cd.c builtin/ft_echo.c \
 				builtin/ft_env.c builtin/ft_exit.c builtin/ft_export.c builtin/ft_pwd.c \
 				builtin/ft_unset.c
+				
+MAIN_SRCS = main/main.c main/gestion_shlvl.c main/call.c main/syntaxe.c
 
-SRCS = main.c gestion_shlvl.c call.c $(LEXER_SRCS) $(PARSER_SRCS) $(EXEC_SRCS) $(EXPANDER_SRCS) $(BUILTIN_SRCS)
+SRCS = $(MAIN_SRCS) $(LEXER_SRCS) $(PARSER_SRCS) $(EXEC_SRCS) $(EXPANDER_SRCS) $(BUILTIN_SRCS)
 
 OBJS = $(SRCS:.c=.o)
 

@@ -103,20 +103,23 @@ void	search_var(t_parser *parser, t_shell *shell)
 
 	var.i = 0;
 	var.j = 0;
-	while (parser->arg[var.j])
+	if (parser->arg)
 	{
-		var.len = 0;
-		var.tmp = NULL;
-		var.var = NULL;
-		while (parser->arg[var.j][var.i])
+		while (parser->arg[var.j])
 		{
-			if (verif_and_schr_in_env(parser, &var, shell) == 1)
-				break ;
+			var.len = 0;
+			var.tmp = NULL;
+			var.var = NULL;
+			while (parser->arg[var.j][var.i])
+			{
+				if (verif_and_schr_in_env(parser, &var, shell) == 1)
+					break ;
+			}
+			if (var.tmp != NULL)
+				replace(parser, var.tmp, var.j, var.len);
+			if (parser->arg[var.j][var.i] == '\0')
+				free_my_var(parser, &var);
+			var.i = 0;
 		}
-		if (var.tmp != NULL)
-			replace(parser, var.tmp, var.j, var.len);
-		if (parser->arg[var.j][var.i] == '\0')
-			free_my_var(parser, &var);
-		var.i = 0;
 	}
 }
