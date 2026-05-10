@@ -99,6 +99,9 @@ int	verif_imput_and_parser(char *imput, t_token **token, t_shell *shell)
 		return (1);
 	}
 	i = how_many_tokens(imput);
+	printf("%d\n", i);
+	if (i == -1)
+		return (1);
 	*token = lexing(imput, i);
 	if (verif_syntax(imput, *token, shell) == 1)
 		return (1);
@@ -107,5 +110,6 @@ int	verif_imput_and_parser(char *imput, t_token **token, t_shell *shell)
 		case_continue(imput, *token, "erreur, il manque une quote");
 		return (1);
 	}
+	
 	return (0);
 }

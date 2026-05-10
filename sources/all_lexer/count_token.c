@@ -68,11 +68,11 @@ int	how_many_tokens(char *imput)
 	while (imput[c.i])
 	{
 		res = mid(imput, &c);
-		if (res == 2)
-			break ;
+		if (imput[c.i] == '\0' && res == 2)
+			return (c.nb);
 		else if (res == -1)
 			return (-1);
 		c.nb++;
 	}
-	return (c.nb);
+	return (-1);
 }
