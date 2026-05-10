@@ -6,7 +6,7 @@
 #    By: msuter <msuter@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/15 11:05:43 by msuter            #+#    #+#              #
-#    Updated: 2026/05/09 17:51:57 by msuter           ###   ########.fr        #
+#    Updated: 2026/05/10 12:03:59 by msuter           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,11 @@ BUILTIN_SRCS = builtin/builtin_utils.c builtin/builtin.c builtin/ft_cd.c builtin
 				
 MAIN_SRCS = main/main.c main/gestion_shlvl.c main/call.c main/syntaxe.c
 
-SRCS = $(MAIN_SRCS) $(LEXER_SRCS) $(PARSER_SRCS) $(EXEC_SRCS) $(EXPANDER_SRCS) $(BUILTIN_SRCS)
+SRCS = $(addprefix sources/, $(MAIN_SRCS)) $(addprefix sources/, $(LEXER_SRCS)) $(addprefix sources/, $(PARSER_SRCS))\
+					$(addprefix sources/, $(EXEC_SRCS)) $(addprefix sources/, $(EXPANDER_SRCS))\
+					$(addprefix sources/, $(BUILTIN_SRCS))
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(addprefix objects/,  $(notdir $(SRCS:.c=.o)))
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -47,18 +49,24 @@ INCLUDES = -I. -I$(LIBFT_DIR)
 all: $(LIBFT) $(NAME)
 	clear
 
+dir:
+	mkdir -p objects
+
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
-$(NAME): $(OBJS)
+$(NAME): dir $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LFLAGS) -o $(NAME)
 
-%.o: %.c
+VPATH = $(shell find sources/ -type d)
+
+objects/%.o : %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
 	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf objects
 	clear
 
 fclean: clean
