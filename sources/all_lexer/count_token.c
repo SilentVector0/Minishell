@@ -10,7 +10,8 @@ static int	case_d_quote(char *imput, t_contexte *c)
 	{
 		c->i++;
 		while (imput[c->i] && !is_space(imput[c->i])
-			&& imput[c->i] != '|' && imput[c->i] != '<' && imput[c->i] != '>')
+			&& imput[c->i] != '|' && imput[c->i] != '<' && imput[c->i] != '>'
+			&& imput[c->i] != '\'' && imput[c->i] != '\"')
 			c->i++;
 		return (0);
 	}
@@ -26,7 +27,8 @@ static int	case_quote(char *imput, t_contexte *c)
 	{
 		c->i++;
 		while (imput[c->i] && !is_space(imput[c->i])
-			&& imput[c->i] != '|' && imput[c->i] != '<' && imput[c->i] != '>')
+			&& imput[c->i] != '|' && imput[c->i] != '<' && imput[c->i] != '>'
+			&& imput[c->i] != '\'' && imput[c->i] != '\"')
 			c->i++;
 		return (0);
 	}
@@ -38,7 +40,7 @@ static int	mid(char *imput, t_contexte *c)
 	while (is_space(imput[c->i]) == 1)
 		c->i++;
 	if (imput[c->i] == '\0')
-		return (2);
+		return (0);
 	if (imput[c->i] == '\'')
 	{
 		if (case_quote(imput, c) == -1)
@@ -53,7 +55,8 @@ static int	mid(char *imput, t_contexte *c)
 		c->i++;
 	else
 		while (imput[c->i] && !is_space(imput[c->i])
-			&& imput[c->i] != '|' && imput[c->i] != '<' && imput[c->i] != '>')
+			&& imput[c->i] != '|' && imput[c->i] != '<' && imput[c->i] != '>'
+			&& imput[c->i] != '\'' && imput[c->i] != '\"')
 			c->i++;
 	return (0);
 }
@@ -68,11 +71,12 @@ int	how_many_tokens(char *imput)
 	while (imput[c.i])
 	{
 		res = mid(imput, &c);
-		if (imput[c.i] == '\0' && res == 2)
-			return (c.nb);
-		else if (res == -1)
+		if (res == -1)
+		{
+			printf("quote manquante\n");
 			return (-1);
+		}
 		c.nb++;
 	}
-	return (-1);
+	return (c.nb);
 }

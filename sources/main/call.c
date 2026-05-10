@@ -99,7 +99,6 @@ int	verif_imput_and_parser(char *imput, t_token **token, t_shell *shell)
 		return (1);
 	}
 	i = how_many_tokens(imput);
-	printf("%d\n", i);
 	if (i == -1)
 		return (1);
 	*token = lexing(imput, i);
