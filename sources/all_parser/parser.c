@@ -1,9 +1,21 @@
-#include "includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 14:58:14 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/13 14:59:28 by aroduit          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "includes/minishell.h"
 
 t_redir	*which_type(t_token *token, int *nb)
 {
 	t_redir	*temp;
+	char	*tmp;
 
 	temp = new_redir_node();
 	if (token[*nb].type == TOKEN_IN)
@@ -15,7 +27,9 @@ t_redir	*which_type(t_token *token, int *nb)
 	else
 		temp->type = REDIR_HEREDOC;
 	(*nb)++;
-	temp->file = filter_dup(ft_strdup(token[*nb].content));
+	tmp = ft_strdup(token[*nb].content);
+	temp->file = filter_dup(tmp);
+	free (tmp);
 	temp->heredoc_fd = -1;
 	(*nb)++;
 	return (temp);

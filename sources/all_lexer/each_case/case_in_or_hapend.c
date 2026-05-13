@@ -1,5 +1,16 @@
-#include "includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   case_in_or_hapend.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 14:29:43 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/13 14:29:43 by aroduit          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "includes/minishell.h"
 
 static int	case_hapend(char *imput, t_contexte *c, t_token *token)
 {

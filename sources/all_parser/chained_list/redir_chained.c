@@ -1,5 +1,16 @@
-#include "includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_chained.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 14:30:31 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/13 14:30:31 by aroduit          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "includes/minishell.h"
 
 t_redir	*new_redir_node(void)
 {

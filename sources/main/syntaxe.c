@@ -1,5 +1,16 @@
-#include "includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syntaxe.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 14:33:15 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/13 14:33:18 by aroduit          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "includes/minishell.h"
 
 int	verif_out_and_append(t_token *token, t_shell *shell, int nb, char *imput)
 {

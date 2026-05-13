@@ -1,5 +1,16 @@
-#include "includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 14:28:52 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/13 14:28:53 by aroduit          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "includes/minishell.h"
 
 void	free_redir(t_parser *parser)
 {

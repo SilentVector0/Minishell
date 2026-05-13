@@ -1,5 +1,16 @@
-#include "includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 16:12:34 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/13 16:14:09 by aroduit          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "includes/minishell.h"
 
 int	ft_export_display(t_shell *shell)
 {
@@ -57,6 +68,7 @@ int	ft_export(t_parser *parser, t_shell *shell)
 	int		i;
 	int		i_envp;
 	int		ret;
+	int		export_int;
 	char	**tmp;
 
 	if (!parser->arg[1])
@@ -65,8 +77,10 @@ int	ft_export(t_parser *parser, t_shell *shell)
 	i = 0;
 	while (parser->arg[++i])
 	{
-		ret = is_valid_identifier(parser->arg[i]);
-		if (ret)
+		export_int = is_valid_identifier(parser->arg[i]);
+		if (export_int)
+			ret = export_int;
+		if (export_int)
 			continue ;
 		i_envp = find_env(shell->envp, parser->arg[i]);
 		tmp = change_var(shell->envp, parser->arg[i], i_envp);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 15:46:01 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/13 15:46:01 by aroduit          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -127,6 +139,7 @@ void		special_var(t_parser *parser, int j, t_shell *shell);
 int			count_len(char *str);
 char		*schr_in_env(char *var, char **envp);
 void		free_my_var(t_parser *parser, t_var *var);
+void		init_var(t_var *var);
 
 //! fonctions builtin
 int			find_env(char **envp, char *var);

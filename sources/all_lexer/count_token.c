@@ -1,5 +1,16 @@
-#include "includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   count_token.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 15:38:58 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/13 15:39:28 by aroduit          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "includes/minishell.h"
 
 static int	case_d_quote(char *imput, t_contexte *c)
 {
@@ -73,6 +84,7 @@ int	how_many_tokens(char *imput)
 		res = mid(imput, &c);
 		if (res == -1)
 		{
+			free(imput);
 			printf("quote manquante\n");
 			return (-1);
 		}

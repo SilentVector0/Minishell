@@ -1,5 +1,16 @@
-#include "includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_expander.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 15:34:24 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/13 16:05:08 by aroduit          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "includes/minishell.h"
 
 void	free_my_var(t_parser *parser, t_var *var)
 {
@@ -26,15 +37,14 @@ int	verif_and_schr_in_env(t_parser *parser, t_var *var, t_shell *shell)
 		}
 		if (!ft_isalpha(parser->arg[var->j][var->i])
 			&& parser->arg[var->j][var->i + 1] != '_')
-		{
-			var->i++;
-			return (0);
-		}
+			return (var->i++, 0);
 		var->len = count_len(parser->arg[var->j] + var->i);
 		var->tmp = ft_substr(parser->arg[var->j], var->i, var->len);
 		var->var = ft_strjoin(var->tmp, "=");
 		free (var->tmp);
 		var->tmp = schr_in_env(var->var, shell->envp);
+		if (var->var)
+			free(var->var);
 		return (1);
 	}
 	var->i++;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   call.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 14:34:05 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/13 14:34:05 by aroduit          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/minishell.h"
 
 void	filter_my_arg(t_parser *current)
@@ -109,6 +121,5 @@ int	verif_imput_and_parser(char *imput, t_token **token, t_shell *shell)
 		case_continue(imput, *token, "erreur, il manque une quote");
 		return (1);
 	}
-	
 	return (0);
 }

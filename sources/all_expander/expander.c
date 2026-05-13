@@ -1,5 +1,16 @@
-#include "includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 15:52:45 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/13 15:53:55 by aroduit          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "includes/minishell.h"
 
 static void	replace(t_parser *parser, char *tmp, int j, int len)
 {
@@ -102,25 +113,24 @@ void	search_var(t_parser *parser, t_shell *shell)
 {
 	t_var	var;
 
-	var.i = 0;
 	var.j = 0;
 	if (parser->arg)
 	{
 		while (parser->arg[var.j])
 		{
-			var.len = 0;
-			var.tmp = NULL;
-			var.var = NULL;
+			init_var (&var);
 			while (parser->arg[var.j][var.i])
 			{
 				if (verif_and_schr_in_env(parser, &var, shell) == 1)
 					break ;
 			}
 			if (var.tmp != NULL)
+			{
 				replace(parser, var.tmp, var.j, var.len);
+				free(var.tmp);
+			}
 			if (parser->arg[var.j][var.i] == '\0')
 				free_my_var(parser, &var);
-			var.i = 0;
 		}
 	}
 }

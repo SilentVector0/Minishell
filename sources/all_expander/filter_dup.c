@@ -1,5 +1,16 @@
-#include "includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   filter_dup.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 15:50:44 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/13 15:50:50 by aroduit          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "includes/minishell.h"
 
 static int	count_new(char *content)
 {
@@ -56,4 +67,12 @@ char	*filter_dup(char *content)
 	}
 	res[count] = '\0';
 	return (res);
+}
+
+void	init_var(t_var *var)
+{
+	var->i = 0;
+	var->len = 0;
+	var->tmp = NULL;
+	var->var = NULL;
 }
