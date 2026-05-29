@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 15:34:24 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 16:05:08 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/05/29 14:03:27 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/29 14:03:44 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 void	free_my_var(t_parser *parser, t_var *var)
 {
-	free(var->tmp);
-	free(var->var);
 	var->var = ft_strdup(parser->arg[var->j]);
 	free(parser->arg[var->j]);
 	parser->arg[var->j] = filter_dup(var->var);
 	free (var->var);
+	var->var = NULL;
 	var->j++;
 }
 

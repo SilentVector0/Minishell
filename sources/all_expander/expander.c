@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 15:52:45 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 15:53:55 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/05/29 14:03:00 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/29 14:03:00 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	search_var(t_parser *parser, t_shell *shell)
 			{
 				replace(parser, var.tmp, var.j, var.len);
 				free(var.tmp);
+				var.tmp = NULL;
 			}
 			if (parser->arg[var.j][var.i] == '\0')
 				free_my_var(parser, &var);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 14:28:41 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 14:28:42 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/05/29 14:08:07 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/29 14:08:15 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	child_process(t_parser *current, int fd[2], int *prev_fd, t_shell *shell)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+	signal(SIGPIPE, SIG_DFL);
 	if (*prev_fd != -1)
 	{
 		dup2(*prev_fd, STDIN_FILENO);
