@@ -5,12 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 14:28:20 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 14:28:20 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/05/31 18:03:06 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/31 18:03:06 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+
+void	close_unused_heredocs(t_redir *redir)
+{
+	t_redir	*tmp;
+	t_redir	*last_heredoc;
+
+	last_heredoc = NULL;
+	tmp = redir;
+	while (tmp)
+	{
+		if (tmp->type == REDIR_HEREDOC)
+			last_heredoc = tmp;
+		tmp = tmp->r_next;
+	}
+	tmp = redir;
+	while (tmp)
+	{
+		if (tmp->type == REDIR_HEREDOC && tmp != last_heredoc)
+		{
+			if (tmp->type == REDIR_HEREDOC && tmp != last_heredoc)
+			{
+				close (tmp->heredoc_fd);
+				tmp->heredoc_fd = -1;
+			}
+		}
+		tmp = tmp->r_next;
+	}
+}
 
 void	warning_msg_heredoc(t_redir	*redir, int line_num)
 {

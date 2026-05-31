@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 15:46:01 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 15:46:01 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/05/31 17:47:37 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/31 17:47:37 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ int			child_process(t_parser *current, int fd[2],
 				int *prev_fd, t_shell *shell);
 void		parent_process(t_parser *current, int fd[2], int *prev_fd);
 void		handle_heredoc_sigint(int sig);
+void		close_unused_heredocs(t_redir *redir);
 
 //! fonction free
 void		free_all(t_parser *parser, t_shell *shell,

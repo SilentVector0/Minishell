@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 14:28:52 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 14:28:53 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/05/31 17:38:58 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/31 17:39:38 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	free_redir(t_parser *parser)
 	{
 		if (parser->redir->file)
 			free (parser->redir->file);
+		if (parser->redir->heredoc_fd != -1)
+			close(parser->redir->heredoc_fd);
 		tmp = parser->redir;
 		parser->redir = parser->redir->r_next;
 		free (tmp);

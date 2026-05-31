@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 14:28:30 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 14:28:31 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/05/31 18:01:55 by aroduit           #+#    #+#             */
+/*   Updated: 2026/05/31 18:02:37 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,14 @@ void	exec_redir_append(char *file)
 void	exec_redir_heredoc(t_redir *redir)
 {
 	if (redir->heredoc_fd == -1)
-		exit (1);
+		return ;
 	dup2(redir->heredoc_fd, STDIN_FILENO);
 	close(redir->heredoc_fd);
 }
 
 void	exec_redir(t_redir *redir)
 {
+	close_unused_heredocs(redir);
 	while (redir)
 	{
 		if (redir->type == REDIR_IN)
