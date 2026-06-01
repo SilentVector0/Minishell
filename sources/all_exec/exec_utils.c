@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/29 14:08:07 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/29 14:08:15 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/01 01:07:32 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/01 01:07:32 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	echec_cmd(t_parser *current)
 {
 	if (access(current->path, X_OK) == 0)
 	{
+		ft_putstr_fd(current->path, 2);
 		ft_putstr_fd(": Is a directory\n", 2);
 		exit(126);
 	}
