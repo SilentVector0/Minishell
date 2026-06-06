@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 17:47:37 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/31 17:47:37 by aroduit          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/06 22:50:46 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct t_redir
 	int		type;
 	int		heredoc_fd;
 	char	*file;
+	int		is_quoted;
 	t_redir	*r_next;
 }	t_redir;
 
@@ -125,8 +126,9 @@ void		free_parser(t_parser *parser);
 void		attrib_redir(t_parser *current, t_redir\
 	**current_redir, t_token *token, int *nb);
 void		attrib_pipe(t_parser **current, t_redir **current_redir, int *nb);
-t_redir		*which_type(t_token *token, int *nb);
+t_redir		*which_type(t_token *token, int *nb, t_parser *parser);
 void		pass_word(int *temp, int *count, t_token *token);
+int			attrib_is_quoted(char *str);
 
 //! fonctions expander
 void		search_var(t_parser *parser, t_shell *shell);
@@ -171,6 +173,7 @@ int			child_process(t_parser *current, int fd[2],
 void		parent_process(t_parser *current, int fd[2], int *prev_fd);
 void		handle_heredoc_sigint(int sig);
 void		close_unused_heredocs(t_redir *redir);
+void		expand_heredoc(char **str, t_shell *shell);
 
 //! fonction free
 void		free_all(t_parser *parser, t_shell *shell,

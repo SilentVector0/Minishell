@@ -6,7 +6,7 @@
 #    By: msuter <msuter@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/15 11:05:43 by msuter            #+#    #+#              #
-#    Updated: 2026/05/10 12:05:51 by msuter           ###   ########.fr        #
+#    Updated: 2026/06/06 22:51:50 by msuter           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ EXPANDER_SRCS = all_expander/expander.c all_expander/filter_dup.c \
 					all_expander/utils_expander.c
 
 EXEC_SRCS = all_exec/exec_cmd.c all_exec/exec_heredoc.c all_exec/exec_redir.c \
-				all_exec/exec_utils.c all_exec/path_cmd.c all_exec/free.c all_exec/sigint.c
+				all_exec/exec_utils.c all_exec/path_cmd.c all_exec/free.c all_exec/sigint.c\
+				all_exec/utils_heredoc.c
 
 BUILTIN_SRCS = builtin/builtin_utils.c builtin/builtin.c builtin/ft_cd.c builtin/ft_echo.c \
 				builtin/ft_env.c builtin/ft_exit.c builtin/ft_export.c builtin/ft_pwd.c \

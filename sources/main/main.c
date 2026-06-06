@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 14:33:02 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 14:33:03 by aroduit          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/06 21:34:23 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ void	init(t_shell *shell, char **envp)
 	i = 0;
 	if (!envp[i])
 	{
-		shell->envp = malloc(sizeof(char *) * 2);
+		
+		shell->envp = malloc(sizeof(char *) * 3);
 		shell->envp[0] = ft_strdup("SHLVL=0");
-		shell->envp[1] = NULL;
+		shell->envp[1] = ft_strdup("PATH=/bin:/usr/bin");
+		shell->envp[2] = NULL;
 		return ;
 	}
 	while (envp[i])

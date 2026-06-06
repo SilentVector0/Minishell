@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 14:58:14 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 14:59:28 by aroduit          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/06 23:02:18 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-t_redir	*which_type(t_token *token, int *nb)
+t_redir	*which_type(t_token *token, int *nb, t_parser *parser)
 {
 	t_redir	*temp;
 	char	*tmp;
@@ -27,6 +27,13 @@ t_redir	*which_type(t_token *token, int *nb)
 	else
 		temp->type = REDIR_HEREDOC;
 	(*nb)++;
+	if (temp->type == REDIR_HEREDOC)
+	{
+		if (attrib_is_quoted(token[*nb].content) == 1)
+			parser->redir->is_quoted = 1;
+		else
+			parser->redir->is_quoted = 0;
+	}
 	tmp = ft_strdup(token[*nb].content);
 	temp->file = filter_dup(tmp);
 	free (tmp);

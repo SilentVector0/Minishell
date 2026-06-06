@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 18:03:06 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/31 18:03:06 by aroduit          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/06 22:28:24 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	heredoc_loop(int fd, t_redir *redir, t_shell *shell)
 			free(line);
 			break ;
 		}
+		if (redir->is_quoted == 0)
+			expand_heredoc(&line, shell);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);

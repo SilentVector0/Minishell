@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 14:31:06 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 14:31:07 by aroduit          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/06 22:48:56 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+
+int	attrib_is_quoted(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	pass_word(int *temp, int *count, t_token *token)
 {
@@ -41,12 +55,12 @@ void	attrib_redir(t_parser *current, t_redir\
 {
 	if (current->redir == NULL)
 	{
-		current->redir = which_type(token, nb);
+		current->redir = which_type(token, nb, current);
 		(*current_redir) = current->redir;
 	}
 	else
 	{
-		(*current_redir)->r_next = which_type(token, nb);
+		(*current_redir)->r_next = which_type(token, nb, current);
 		(*current_redir) = (*current_redir)->r_next;
 	}
 }
