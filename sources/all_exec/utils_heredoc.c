@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/06 21:39:42 by msuter            #+#    #+#             */
-/*   Updated: 2026/06/06 22:53:51 by msuter           ###   ########.fr       */
+/*   Updated: 2026/06/07 01:08:54 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,11 @@ static int	replace_var(char **str, int i, t_shell *shell)
 		i++;
 	}
 	tmp[j] = '\0';
-	var = schr_in_env(tmp, shell->envp);
+	var = ft_strjoin(tmp, "=");
 	free(tmp);
-	new_str(str, var, count);
+	tmp = schr_in_env(var, shell->envp);
+	free(var);
+	new_str(str, tmp, count);
 	return (count);
 }
 

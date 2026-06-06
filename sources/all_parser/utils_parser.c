@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 14:31:06 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/06 22:48:56 by msuter           ###   ########.fr       */
+/*   Updated: 2026/06/07 01:01:26 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	attrib_redir(t_parser *current, t_redir\
 {
 	if (current->redir == NULL)
 	{
-		current->redir = which_type(token, nb, current);
+		current->redir = which_type(token, nb);
 		(*current_redir) = current->redir;
 	}
 	else
 	{
-		(*current_redir)->r_next = which_type(token, nb, current);
+		(*current_redir)->r_next = which_type(token, nb);
 		(*current_redir) = (*current_redir)->r_next;
 	}
 }

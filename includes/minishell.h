@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 17:47:37 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/06 22:50:46 by msuter           ###   ########.fr       */
+/*   Updated: 2026/06/07 01:01:37 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void		free_parser(t_parser *parser);
 void		attrib_redir(t_parser *current, t_redir\
 	**current_redir, t_token *token, int *nb);
 void		attrib_pipe(t_parser **current, t_redir **current_redir, int *nb);
-t_redir		*which_type(t_token *token, int *nb, t_parser *parser);
+t_redir		*which_type(t_token *token, int *nb);
 void		pass_word(int *temp, int *count, t_token *token);
 int			attrib_is_quoted(char *str);
 
