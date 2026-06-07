@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 14:28:11 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 14:28:11 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/07 09:29:24 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 09:29:29 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,14 @@ int	get_exec(t_parser *parser, t_shell *shell)
 	{
 		ft_putstr_fd(parser->cmd, 2);
 		ft_putstr_fd(": command not found\n", 2);
+		free_parser(parser);
+		free_shell(shell);
 		return (127);
 	}
 	return (0);
 }
 
-int	execute_cmd(t_parser *parser, t_shell *shell, t_token *token, char *imput)
+int	execute_cmd(t_parser *parser, t_shell *shell)
 {
 	int	prev_fd;
 
@@ -106,7 +108,7 @@ int	execute_cmd(t_parser *parser, t_shell *shell, t_token *token, char *imput)
 	}
 	if (is_builtin(parser) && parser->next == NULL && parser->redir == NULL)
 	{
-		shell->exit_status = exec_builtin(parser, shell, token, imput);
+		shell->exit_status = exec_builtin(parser, shell);
 		return (shell->exit_status);
 	}
 	shell->exit_status = execute_pipeline(parser, &prev_fd, shell);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/29 14:03:00 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/29 14:03:00 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/07 10:26:31 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 10:28:25 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,23 @@ static void	replace(t_parser *parser, char *tmp, int j, int len)
 	char	*res;
 	int		i;
 	int		k;
-	int		l;
+	int		new_len;
 
-	init_replace(&i, &k, &l);
-	i = ft_strlen(parser->arg[j]) + ft_strlen(tmp) - len;
-	res = malloc(sizeof(char) * i + 1);
+	new_len = ft_strlen(parser->arg[j]) - len - 1 + ft_strlen(tmp);
+	if (new_len < 0)
+		new_len = 0;
+	res = malloc(sizeof(char) * (new_len + 1));
+	if (!res)
+		return ;
 	i = 0;
-	while (parser->arg[j][i])
-	{
-		if (parser->arg[j][i] == '$')
-		{
-			i += len + 1;
-			while (tmp[l])
-				res[k++] = tmp[l++];
-			while (parser->arg[j][i])
-				res[k++] = parser->arg[j][i++];
-			break ;
-		}
+	k = 0;
+	while (parser->arg[j][i] && parser->arg[j][i] != '$')
 		res[k++] = parser->arg[j][i++];
-	}
+	i += len + 1;
+	while (*tmp)
+		res[k++] = *tmp++;
+	while (parser->arg[j][i])
+		res[k++] = parser->arg[j][i++];
 	res[k] = '\0';
 	free(parser->arg[j]);
 	parser->arg[j] = res;
@@ -129,6 +127,7 @@ void	search_var(t_parser *parser, t_shell *shell)
 				replace(parser, var.tmp, var.j, var.len);
 				free(var.tmp);
 				var.tmp = NULL;
+				continue ;
 			}
 			if (parser->arg[var.j][var.i] == '\0')
 				free_my_var(parser, &var);

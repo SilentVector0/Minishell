@@ -6,7 +6,7 @@
 #    By: msuter <msuter@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/15 11:05:43 by msuter            #+#    #+#              #
-#    Updated: 2026/06/06 22:51:50 by msuter           ###   ########.fr        #
+#    Updated: 2026/06/07 09:42:34 by msuter           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,9 @@ VPATH = $(shell find sources/ -type d)
 
 objects/%.o : %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+val: $(NAME)
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=all ./minishell
 
 clean:
 	rm -f $(OBJS)

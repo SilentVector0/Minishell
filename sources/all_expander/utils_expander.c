@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/29 14:03:27 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/29 14:03:44 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/07 10:23:49 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 10:23:49 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	verif_and_schr_in_env(t_parser *parser, t_var *var, t_shell *shell)
 			special_var(parser, var->j, shell);
 			return (1);
 		}
+		if (parser->arg[var->j][var->i] == '\0')
+    		return (0);
 		if (!ft_isalpha(parser->arg[var->j][var->i])
 			&& parser->arg[var->j][var->i + 1] != '_')
 			return (var->i++, 0);

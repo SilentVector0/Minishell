@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 14:32:09 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 14:32:11 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/07 07:59:50 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 07:59:50 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ long	ft_parse_exit(const char *nptr, long *out)
 	return (1);
 }
 
-int	ft_exit(t_parser *parser, t_shell *shell, t_token *token, char *imput)
+int	ft_exit(t_parser *parser, t_shell *shell)
 {
 	long	code;
 
@@ -45,7 +45,7 @@ int	ft_exit(t_parser *parser, t_shell *shell, t_token *token, char *imput)
 	if (!parser->arg[1])
 	{
 		code = shell->exit_status;
-		free_all(parser, shell, token, imput);
+		free_all(parser, shell);
 		exit (code);
 	}
 	if (!ft_parse_exit(parser->arg[1], &code))
@@ -53,11 +53,11 @@ int	ft_exit(t_parser *parser, t_shell *shell, t_token *token, char *imput)
 		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(parser->arg[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
-		free_all(parser, shell, token, imput);
+		free_all(parser, shell);
 		exit(2);
 	}
 	if (parser->arg[2])
 		return (ft_putstr_fd("minishell: exit: too many arguments\n", 2), 1);
-	free_all(parser, shell, token, imput);
+	free_all(parser, shell);
 	exit ((unsigned char)code);
 }

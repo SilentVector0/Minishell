@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/01 01:07:32 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/01 01:07:32 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/07 09:29:46 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 09:29:46 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ int	child_process(t_parser *current, int fd[2], int *prev_fd, t_shell *shell)
 	if (current->redir)
 		exec_redir(current->redir);
 	if (is_builtin(current))
-		exit (exec_builtin(current, shell, NULL, NULL));
+		exit (exec_builtin(current, shell));
 	if (!current->cmd || get_exec(current, shell))
 		exit(127);
 	execve(current->path, current->arg, shell->envp);
+	free_shell(shell);
 	echec_cmd(current);
 	exit(127);
 }
@@ -56,6 +57,7 @@ void	echec_cmd(t_parser *current)
 	{
 		ft_putstr_fd(current->path, 2);
 		ft_putstr_fd(": Is a directory\n", 2);
+		free_parser(current);
 		exit(126);
 	}
 	else
@@ -64,6 +66,7 @@ void	echec_cmd(t_parser *current)
 		{
 			ft_putstr_fd(current->path, 2);
 			ft_putstr_fd(": Permission denied\n", 2);
+			free_parser(current);
 			exit(126);
 		}
 	}

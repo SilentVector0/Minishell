@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 14:31:32 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 14:31:33 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/07 07:59:35 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 07:59:35 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	is_builtin(t_parser *parser)
 	return (0);
 }
 
-int	exec_builtin(t_parser *parser, t_shell *shell, t_token *token, char *imput)
+int	exec_builtin(t_parser *parser, t_shell *shell)
 {
 	if (ft_strcmp(parser->cmd, "echo") == 0)
 		return (ft_echo(parser));
@@ -48,6 +48,6 @@ int	exec_builtin(t_parser *parser, t_shell *shell, t_token *token, char *imput)
 	if (ft_strcmp(parser->cmd, "env") == 0)
 		return (ft_env(shell));
 	if (ft_strcmp(parser->cmd, "exit") == 0)
-		return (ft_exit(parser, shell, token, imput));
+		return (ft_exit(parser, shell));
 	return (0);
 }

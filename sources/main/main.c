@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 14:33:02 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/06 21:34:23 by msuter           ###   ########.fr       */
+/*   Created: 2026/06/07 08:13:14 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 11:00:01 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,11 @@ int	main(int argc, char **argv, char **envp)
 		if (verif_imput_and_parser(imput, &token, shell) != 0)
 			continue ;
 		parser = create_parser(token);
+		free_token(imput, token);
 		if (parser != NULL)
-			if (parser_diff_null(parser, shell, token, imput) != 0)
+			if (parser_diff_null(parser, shell) != 0)
 				continue ;
-		free_each_loop(imput, token, parser);
+		free_parser(parser);
 	}
 	free_shell(shell);
 }

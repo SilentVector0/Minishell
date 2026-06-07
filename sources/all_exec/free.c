@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/31 17:38:58 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/31 17:39:38 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/07 07:57:12 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 07:57:19 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,19 @@ void	free_token(char *imput, t_token *token)
 	int	i;
 
 	i = -1;
+	if (!token)
+	{
+		free (imput);
+		return ;
+	}
 	while (token[++i].type != TOKEN_END)
 		free(token[i].content);
 	free(token);
 	free(imput);
 }
 
-void	free_all(t_parser *parser, t_shell *shell, t_token *token, char *imput)
+void	free_all(t_parser *parser, t_shell *shell)
 {
 	free_shell(shell);
 	free_parser(parser);
-	free_token(imput, token);
 }

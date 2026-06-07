@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 14:34:05 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 14:34:05 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/07 08:10:38 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 08:10:38 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ int	commande_null(t_parser *parser, t_shell *shell)
 	return (1);
 }
 
-int	parser_diff_null(t_parser *parser, t_shell *shell,
-	t_token *token, char *imput)
+int	parser_diff_null(t_parser *parser, t_shell *shell)
 {
 	search_var(parser, shell);
 	filter_all_args(parser);
@@ -96,7 +95,7 @@ int	parser_diff_null(t_parser *parser, t_shell *shell,
 	if (parser->cmd && parser->cmd[0] == '\0')
 		if (commande_null(parser, shell) == 0)
 			return (0);
-	execute_cmd(parser, shell, token, imput);
+	execute_cmd(parser, shell);
 	return (0);
 }
 
