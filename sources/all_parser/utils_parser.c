@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 14:31:06 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/07 01:01:26 by msuter           ###   ########.fr       */
+/*   Updated: 2026/06/07 11:16:07 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	attrib_is_quoted(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
+		if (str[i] == '\'' || str[i] == '\"')
 			return (1);
 		i++;
 	}
