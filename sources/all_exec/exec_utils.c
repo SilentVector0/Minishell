@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/07 09:29:46 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/07 09:29:46 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/07 12:07:08 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 12:12:54 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ void	echec_cmd(t_parser *current)
 			free_parser(current);
 			exit(126);
 		}
-	}
+	}	
 	perror(current->cmd);
+	free_parser(current);
 }
 
 void	free_tab(t_parser *parser)

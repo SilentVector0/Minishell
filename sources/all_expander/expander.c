@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/07 10:26:31 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/07 10:28:25 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/07 11:42:29 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 11:49:56 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,40 @@ void	special_var(t_parser *parser, int j, t_shell *shell)
 	parser->arg[j] = new;
 }
 
+void    split_arg(t_parser *parser, int j)
+{
+    char    **split;
+    char    **new_arg;
+    int     old_len;
+    int     split_len;
+    int     i;
+    int     k;
+
+    split = ft_split(parser->arg[j], ' ');
+    split_len = 0;
+    while (split[split_len])
+        split_len++;
+    old_len = 0;
+    while (parser->arg[old_len])
+        old_len++;
+    new_arg = malloc(sizeof(char *) * (old_len + split_len));
+    k = 0;
+    i = 0;
+    while (i < j)
+        new_arg[k++] = parser->arg[i++];
+    i = 0;
+    while (split[i])
+        new_arg[k++] = split[i++];
+    free(split);
+    i = j + 1;
+    while (parser->arg[i])
+        new_arg[k++] = parser->arg[i++];
+    new_arg[k] = NULL;
+    free(parser->arg[j]);
+    free(parser->arg);
+    parser->arg = new_arg;
+}
+
 void	search_var(t_parser *parser, t_shell *shell)
 {
 	t_var	var;
@@ -127,6 +161,8 @@ void	search_var(t_parser *parser, t_shell *shell)
 				replace(parser, var.tmp, var.j, var.len);
 				free(var.tmp);
 				var.tmp = NULL;
+				if (ft_strchr(parser->arg[var.j], ' '))
+        			split_arg(parser, var.j);
 				continue ;
 			}
 			if (parser->arg[var.j][var.i] == '\0')

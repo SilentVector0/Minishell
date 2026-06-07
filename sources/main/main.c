@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/07 08:13:14 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/07 11:00:01 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/07 12:27:55 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 12:49:13 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
+	if (!isatty(STDOUT_FILENO))
+    	exit(0);
 	shell = init_my_tshell(envp);
 	token = NULL;
 	parent_signals();

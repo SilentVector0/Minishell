@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/06 21:39:42 by msuter            #+#    #+#             */
-/*   Updated: 2026/06/07 01:08:54 by msuter           ###   ########.fr       */
+/*   Created: 2026/06/07 11:58:19 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/07 11:58:34 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	replace_var(char **str, int i, t_shell *shell)
 		count++;
 		j++;
 	}
-	tmp = malloc(sizeof(char) * count + 1);
+	tmp = malloc(sizeof(char) * (count + 1));
 	j = 0;
 	while (j != count)
 	{
@@ -69,6 +69,7 @@ static int	replace_var(char **str, int i, t_shell *shell)
 	tmp = schr_in_env(var, shell->envp);
 	free(var);
 	new_str(str, tmp, count);
+	free(tmp);
 	return (count);
 }
 
