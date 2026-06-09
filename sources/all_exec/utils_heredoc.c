@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/07 11:58:19 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/07 11:58:34 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/09 16:00:25 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/09 16:00:33 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static void	new_str(char **str, char *tmp, int len)
 
 static int	replace_var(char **str, int i, t_shell *shell)
 {
-	char *tmp;
-	char *var;
-	int	count;
-	int	j;
+	char	*tmp;
+	char	*var;
+	int		count;
+	int		j;
 
 	j = i;
 	count = 0;
@@ -58,11 +58,7 @@ static int	replace_var(char **str, int i, t_shell *shell)
 	tmp = malloc(sizeof(char) * (count + 1));
 	j = 0;
 	while (j != count)
-	{
-		tmp[j] = (*str)[i];
-		j++;
-		i++;
-	}
+		tmp[j++] = (*str)[i++];
 	tmp[j] = '\0';
 	var = ft_strjoin(tmp, "=");
 	free(tmp);

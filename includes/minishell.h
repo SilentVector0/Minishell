@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/07 09:28:44 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/07 09:29:20 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/09 20:31:37 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/09 20:31:37 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_shell
 	int		exit_status;
 	int		line_num;
 	int		shell_lvl;
+	int		interactive;
 }	t_shell;
 
 typedef struct s_var
@@ -120,7 +121,7 @@ int			is_redirect(t_token *token, int	*nb);
 t_parser	*new_node(void);
 t_redir		*new_redir_node(void);
 t_redir		*attach_redir_node(t_redir *current);
-t_parser	*create_parser(t_token *token);
+t_parser	*create_parser(t_token *token, char *imput);
 char		*get_path(char *cmd, char **envp);
 void		free_parser(t_parser *parser);
 void		attrib_redir(t_parser *current, t_redir\
@@ -142,6 +143,9 @@ int			count_len(char *str);
 char		*schr_in_env(char *var, char **envp);
 void		free_my_var(t_parser *parser, t_var *var);
 void		init_var(t_var *var);
+void		process_arg(t_parser *parser, t_shell *shell, t_var *var);
+void		replace(t_parser *parser, char *tmp, int j, int len);
+void		split_arg(t_parser *parser, int j);
 
 //! fonctions builtin
 int			find_env(char **envp, char *var);
@@ -171,6 +175,7 @@ void		parent_process(t_parser *current, int fd[2], int *prev_fd);
 void		handle_heredoc_sigint(int sig);
 void		close_unused_heredocs(t_redir *redir);
 void		expand_heredoc(char **str, t_shell *shell);
+void		child_signals(void);
 
 //! fonction free
 void		free_all(t_parser *parser, t_shell *shell);

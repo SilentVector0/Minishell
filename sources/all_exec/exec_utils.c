@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/07 12:07:08 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/07 12:12:54 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/09 20:31:17 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/09 20:50:24 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int	child_process(t_parser *current, int fd[2], int *prev_fd, t_shell *shell)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGPIPE, SIG_DFL);
+	int	exit_code;
+
 	if (*prev_fd != -1)
 	{
 		dup2(*prev_fd, STDIN_FILENO);
@@ -31,7 +30,11 @@ int	child_process(t_parser *current, int fd[2], int *prev_fd, t_shell *shell)
 	if (current->redir)
 		exec_redir(current->redir);
 	if (is_builtin(current))
-		exit (exec_builtin(current, shell));
+	{
+		exit_code = exec_builtin(current, shell);
+		free_all(parser, shell);
+		exit (exit_code);
+	}
 	if (!current->cmd || get_exec(current, shell))
 		exit(127);
 	execve(current->path, current->arg, shell->envp);
@@ -69,7 +72,7 @@ void	echec_cmd(t_parser *current)
 			free_parser(current);
 			exit(126);
 		}
-	}	
+	}
 	perror(current->cmd);
 	free_parser(current);
 }

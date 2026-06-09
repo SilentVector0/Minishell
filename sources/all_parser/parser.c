@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 14:58:14 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/07 01:01:04 by msuter           ###   ########.fr       */
+/*   Created: 2026/06/09 15:23:14 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/09 15:23:23 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ t_redir	*which_type(t_token *token, int *nb)
 	temp->file = filter_dup(tmp);
 	free (tmp);
 	temp->heredoc_fd = -1;
-	(*nb)++;
-	return (temp);
+	return ((*nb)++, temp);
 }
 
 void	arg_after_cmd(t_token *token, t_parser *current, int *nb)
@@ -102,7 +101,7 @@ int	cmd_or_file(t_token *token, t_parser *current, int *nb)
 	return (0);
 }
 
-t_parser	*create_parser(t_token *token)
+t_parser	*create_parser(t_token *token, char *imput)
 {
 	int			nb;
 	t_parser	*parser;
@@ -124,5 +123,6 @@ t_parser	*create_parser(t_token *token)
 		else if (token[nb].type == TOKEN_PIPE)
 			attrib_pipe(&current, &current_redir, &nb);
 	}
+	free_token(imput, token);
 	return (parser);
 }

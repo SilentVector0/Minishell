@@ -5,22 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/07 10:23:49 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/07 10:23:49 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2026/06/09 15:59:01 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/09 15:59:41 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-
-void	free_my_var(t_parser *parser, t_var *var)
-{
-	var->var = ft_strdup(parser->arg[var->j]);
-	free(parser->arg[var->j]);
-	parser->arg[var->j] = filter_dup(var->var);
-	free (var->var);
-	var->var = NULL;
-	var->j++;
-}
 
 int	verif_and_schr_in_env(t_parser *parser, t_var *var, t_shell *shell)
 {
@@ -30,12 +20,9 @@ int	verif_and_schr_in_env(t_parser *parser, t_var *var, t_shell *shell)
 	{
 		var->i++;
 		if (parser->arg[var->j][var->i] == '?')
-		{
-			special_var(parser, var->j, shell);
-			return (1);
-		}
+			return (special_var(parser, var->j, shell), 1);
 		if (parser->arg[var->j][var->i] == '\0')
-    		return (0);
+			return (0);
 		if (!ft_isalpha(parser->arg[var->j][var->i])
 			&& parser->arg[var->j][var->i + 1] != '_')
 			return (var->i++, 0);
@@ -48,8 +35,7 @@ int	verif_and_schr_in_env(t_parser *parser, t_var *var, t_shell *shell)
 			free(var->var);
 		return (1);
 	}
-	var->i++;
-	return (0);
+	return (var->i++, 0);
 }
 
 void	init_replace(int *i, int *k, int *l)
