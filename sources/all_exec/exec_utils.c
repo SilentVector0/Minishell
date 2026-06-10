@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:31:17 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/09 20:50:24 by aroduit          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/10 12:00:30 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,13 @@ int	child_process(t_parser *current, int fd[2], int *prev_fd, t_shell *shell)
 	if (is_builtin(current))
 	{
 		exit_code = exec_builtin(current, shell);
-		free_all(parser, shell);
+		free_all(current, shell);
 		exit (exit_code);
 	}
 	if (!current->cmd || get_exec(current, shell))
 		exit(127);
 	execve(current->path, current->arg, shell->envp);
-	free_shell(shell);
-	echec_cmd(current);
-	exit(127);
+	return (after_exc(current, shell), 0);
 }
 
 void	parent_process(t_parser *current, int fd[2], int *prev_fd)

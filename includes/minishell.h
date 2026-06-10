@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:31:37 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/09 20:31:37 by aroduit          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/10 11:58:28 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void		handle_heredoc_sigint(int sig);
 void		close_unused_heredocs(t_redir *redir);
 void		expand_heredoc(char **str, t_shell *shell);
 void		child_signals(void);
+void		after_exc(t_parser *current, t_shell *shell);
 
 //! fonction free
 void		free_all(t_parser *parser, t_shell *shell);

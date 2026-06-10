@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   path_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 14:29:00 by aroduit           #+#    #+#             */
-/*   Updated: 2026/05/13 14:29:00 by aroduit          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/10 11:58:04 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+
+void	after_exc(t_parser *current, t_shell *shell)
+{
+	free_shell(shell);
+	echec_cmd(current);
+	exit(127);
+}
 
 char	*get_env_path(char **envp)
 {
